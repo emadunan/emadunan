@@ -4,7 +4,7 @@ import { FC } from "react";
 interface FooterProps {
   className?: string;
 }
- 
+
 const Footer: FC<FooterProps> = (props) => {
   return (
     <Box component="footer" className={props.className}>
@@ -15,6 +15,6 @@ const Footer: FC<FooterProps> = (props) => {
       </Container>
     </Box>
   );
-}
- 
+};
+
 export default Footer;
