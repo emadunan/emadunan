@@ -9,10 +9,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-
-const pages = ['home', 'about', 'contact'];
+import { useRouter } from 'next/router';
 
 function ResponsiveAppBar() {
+
+  const router = useRouter();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -47,7 +49,7 @@ function ResponsiveAppBar() {
             </Typography>
           </Box>
 
-          <Box component="div" sx={{display: { xs: 'flex', md: 'none' }, width: "100%", alignItems: "center" }}>
+          <Box component="div" sx={{ display: { xs: 'flex', md: 'none' }, width: "100%", alignItems: "center" }}>
             <Box>
               <IconButton
                 size="large"
@@ -77,11 +79,15 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={() => router.push(`/`)}>
+                  <Typography textAlign="center">Home</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => router.push(`/about`)}>
+                  <Typography textAlign="center">About</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => router.push(`/contact`)}>
+                  <Typography textAlign="center">Contact</Typography>
+                </MenuItem>
               </Menu>
             </Box>
             <Typography
@@ -105,15 +111,24 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              onClick={() => router.push(`/`)}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              Home
+            </Button>
+            <Button
+              onClick={() => router.push(`/about`)}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              About
+            </Button>
+            <Button
+              onClick={() => router.push(`/contact`)}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              Contact
+            </Button>
           </Box>
         </Toolbar>
       </Container>

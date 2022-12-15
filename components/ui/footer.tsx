@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { FC } from "react";
 
 interface FooterProps {
@@ -7,13 +7,13 @@ interface FooterProps {
  
 const Footer: FC<FooterProps> = (props) => {
   return (
-    <footer className={props.className}>
+    <Box component="footer" className={props.className}>
       <Container>
-        <div className="h-28 flex items-center justify-center">
+        <Box component="div" className="h-28 flex items-center justify-center">
           Copy rights reserved @ 2023
-        </div>
+        </Box>
       </Container>
-    </footer>
+    </Box>
   );
 }
  

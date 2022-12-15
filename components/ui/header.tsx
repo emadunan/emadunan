@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { FC } from "react";
 import Navbar from "./navbar";
 
@@ -7,9 +8,9 @@ interface HeaderProps {
  
 const Header: FC<HeaderProps> = (props) => {
   return (
-    <header className={props.className}>
+    <Box component="header" className={props.className}>
       <Navbar />
-    </header>
+    </Box>
   );
 }
  
