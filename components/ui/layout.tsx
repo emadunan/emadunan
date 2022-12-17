@@ -14,7 +14,7 @@ const Layout: FC<LayoutProps> = (props) => {
     <Box component="div" className="bg-secondary min-h-screen flex flex-col">
       <Container>
         <Box component="div" className="h-20" />
-        <Header className="sticky top-0 z-10" />
+        <Header className="sticky top-0 z-30" />
         <Box component="main" className="my-4">
           {props.children}
         </Box>

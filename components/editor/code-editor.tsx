@@ -35,7 +35,7 @@ const CodeEditor: FC<CodeEditorProps> = (props) => {
   };
 
   return (
-    <Box component="div" className="relative">
+    <Box component="div" className="relative h-full w-[calc(100%-10px)]">
       <Button
         variant="contained"
         color="primary"
@@ -45,7 +45,7 @@ const CodeEditor: FC<CodeEditorProps> = (props) => {
         Formate
       </Button>
       <Editor
-        height="50vh"
+        height="100%"
         theme="vs-dark"
         defaultLanguage="javascript"
         value={code}
