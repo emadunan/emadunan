@@ -1,5 +1,5 @@
-import { FC, useRef, useState } from "react";
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import { FC, useState } from "react";
+import Editor from "@monaco-editor/react";
 import { editor } from "monaco-editor";
 import { Box, Button } from "@mui/material";
 import prettier from "prettier";

@@ -10,4 +10,5 @@ const nextConfig = {
   swcMinify: true,
 }
 
-module.exports = nextConfig
+const removeImports = require('next-remove-imports')();
+module.exports = removeImports(nextConfig); // module.exports = nextConfig
