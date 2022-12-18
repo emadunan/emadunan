@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 
-import CodeEditor from "../editor/code-editor";
-import Preview from "../editor/preview";
+import CodeEditor from "./code-editor";
+import Preview from "./preview";
 import bundle from "../bundler/index";
 import Resizable from "./resizable";
 

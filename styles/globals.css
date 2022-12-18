@@ -12,6 +12,14 @@ body {
   margin: 0;
 }
 
+.md-editor-preview ul, .wmde-markdown ul {
+  list-style: disc;
+}
+
+.md-editor-preview ol, .wmde-markdown ol {
+  list-style: lower-alpha;
+}
+
 .react-resizable-handle {
   display: block;
   background-color: #37414b;

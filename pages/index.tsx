@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
-import CodeCell from "../components/ui/code-cell";
+import CodeCell from "../components/editor/code-cell";
 import TextEditor from "../components/editor/text-editor";
 
 const Home: FC = () => {
