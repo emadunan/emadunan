@@ -26,6 +26,7 @@
     "esbuild-wasm": "0.8.57",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "immer": "^9.0.16",
     "localforage": "^1.10.0",
     "monaco-editor": "^0.34.1",
     "next": "13.0.6",
