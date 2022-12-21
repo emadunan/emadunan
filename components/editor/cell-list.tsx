@@ -18,7 +18,7 @@ const CellList: FC<CellListProps> = () => {
       {cells.map((cell: Cell) => (
         <Fragment key={cell.id}>
           <CellItem cell={cell} />
-          <AddCell prevCellId={cell.id} />
+          <AddCell prevCellId={cell.id} className="opacity-0 hover:opacity-100"/>
         </Fragment>
       ))}
     </Box>
