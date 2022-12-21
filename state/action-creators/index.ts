@@ -17,7 +17,7 @@ export const moveCell = (id: string, direction: Direction): MoveCellAction => ({
   payload: { id, direction },
 });
 
-export const inserCellBefore = (id: string, type: CellType): InsertCellBeforeAction => {
+export const inserCellBefore = (id: string | null, type: CellType): InsertCellBeforeAction => {
   return {
     type: ActionType.INSERT_CELL_BEFORE,
     payload: { id, type }

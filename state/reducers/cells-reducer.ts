@@ -49,7 +49,7 @@ const CellsReducer = produce((state: CellsState = initialState, action: Action) 
       const { id, direction } = action.payload;
 
       const idx = state.order.indexOf(id);
-      const targetIdx = direction === "up" ? idx + 1 : idx - 1;
+      const targetIdx = direction === "down" ? idx + 1 : idx - 1;
 
       if (targetIdx < 0 || targetIdx > state.order.length - 1) return;
 
@@ -82,7 +82,7 @@ const CellsReducer = produce((state: CellsState = initialState, action: Action) 
     default:
       return state;
   }
-});
+}, initialState);
 
 export default CellsReducer;
 

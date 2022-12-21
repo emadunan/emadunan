@@ -1,13 +1,11 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
-import CodeCell from "../components/editor/code-cell";
-import TextEditor from "../components/editor/text-editor";
+import CellList from "../components/editor/cell-list";
 
 const Home: FC = () => {
   return (
     <Box component="div">
-      <TextEditor />
-      {/* <CodeCell /> */}
+      <CellList />
     </Box>
   );
 };

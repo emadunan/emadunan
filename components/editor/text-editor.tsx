@@ -2,6 +2,8 @@ import { FC, useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
+import { Cell } from "../../state";
+import { useActions } from "../../hooks/use-actions";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -12,13 +14,16 @@ const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-interface TextEditorProps {}
+interface TextEditorProps {
+  cell: Cell;
+}
 
-const TextEditor: FC<TextEditorProps> = () => {
+const TextEditor: FC<TextEditorProps> = ({ cell }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [editing, setEditing] = useState(false);
-  const [value, setValue] = useState<string>("Hello Markdown!");
+
+  const { updateCell } = useActions();
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -44,10 +49,10 @@ const TextEditor: FC<TextEditorProps> = () => {
     return (
       <div ref={ref}>
         <MarkdownEditor
-          value={value}
+          value={cell.content}
           minHeight="10rem"
           theme={"dark"}
-          onChange={(val) => setValue(val)}
+          onChange={(val) => updateCell(cell.id, val || "")}
         />
       </div>
     );
@@ -55,7 +60,7 @@ const TextEditor: FC<TextEditorProps> = () => {
 
   return (
     <div onClick={() => setEditing(true)}>
-      <MarkdownPreview source={value} />
+      <MarkdownPreview source={cell.content || "Click to edit"} />
     </div>
   );
 };

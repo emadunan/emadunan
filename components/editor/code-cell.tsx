@@ -5,15 +5,23 @@ import CodeEditor from "./code-editor";
 import Preview from "./preview";
 import bundle from "../bundler/index";
 import Resizable from "./resizable";
+import { Cell } from "../../state";
+import { useActions } from "../../hooks/use-actions";
 
-const CodeCell: FC = () => {
+interface CodeCellProps {
+  cell: Cell;
+}
+
+const CodeCell: FC<CodeCellProps> = ({ cell }) => {
   const [input, setInput] = useState<string>("");
   const [code, setCode] = useState<string>("");
   const [err, setErr] = useState<string>("");
 
+  const { updateCell } = useActions();
+
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const output = await bundle(input);
+      const output = await bundle(cell.content);
       setCode(output.code);
       setErr(output.err);
     }, 2000);
@@ -21,13 +29,13 @@ const CodeCell: FC = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [input]);
+  }, [cell.content]);
 
   return (
     <Resizable direction="vertical">
       <Box component="div" className="h-full flex flex-row">
         <Resizable direction="horizontal">
-          <CodeEditor onChange={(value) => setInput(value)} />
+          <CodeEditor onChange={(value) => updateCell(cell.id, value)} />
         </Resizable>
         <Preview code={code} err={err} />
       </Box>
