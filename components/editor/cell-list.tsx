@@ -14,13 +14,13 @@ const CellList: FC<CellListProps> = () => {
 
   return (
     <Box component="div">
+      <AddCell prevCellId={null} />
       {cells.map((cell: Cell) => (
         <Fragment key={cell.id}>
-          <AddCell nextCellId={cell.id} />
           <CellItem cell={cell} />
+          <AddCell prevCellId={cell.id} />
         </Fragment>
       ))}
-      <AddCell nextCellId={null} />
     </Box>
   );
 }

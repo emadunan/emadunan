@@ -3,16 +3,16 @@ import { FC } from "react";
 import { useActions } from "../../hooks/use-actions";
 
 interface AddCellProps {
-  nextCellId: string | null;
+  prevCellId: string | null;
 }
 
-const AddCell: FC<AddCellProps> = ({ nextCellId }) => {
-  const { inserCellBefore } = useActions();
+const AddCell: FC<AddCellProps> = ({ prevCellId }) => {
+  const { inserCellAfter } = useActions();
   return (
     <Box component="div">
       <Divider>
-        <Button variant="outlined" onClick={() => inserCellBefore(nextCellId, "code")}>Add Code</Button>
-        <Button variant="outlined" onClick={() => inserCellBefore(nextCellId, "text")}>Add Text</Button>
+        <Button variant="outlined" onClick={() => inserCellAfter(prevCellId, "code")} className="mx-4">Add Code</Button>
+        <Button variant="outlined" onClick={() => inserCellAfter(prevCellId, "text")} className="mx-4">Add Text</Button>
       </Divider>
     </Box>
   );

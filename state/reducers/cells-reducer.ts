@@ -79,6 +79,27 @@ const CellsReducer = produce((state: CellsState = initialState, action: Action) 
       return;
     }
 
+    case ActionType.INSERT_CELL_AFTER: {
+      const { id: currentCellId, type } = action.payload;
+      const cell: Cell = {
+        id: randomId(),
+        type,
+        content: "",
+      }
+
+      state.data[cell.id] = cell;
+
+      const currentCellIdx = state.order.findIndex(id => id === currentCellId);
+
+      if (currentCellIdx < 0) {
+        state.order.unshift(cell.id);
+      } else {
+        state.order.splice(currentCellIdx + 1, 0, cell.id);
+      }
+
+      return;
+    }
+
     default:
       return state;
   }
