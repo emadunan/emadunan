@@ -8,7 +8,11 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
-}
+  eslint: {
+    ignoreDuringBuilds: true,
+    dirs: ["."],
+  },
+};
 
-const removeImports = require('next-remove-imports')();
+const removeImports = require("next-remove-imports")();
 module.exports = removeImports(nextConfig); // module.exports = nextConfig

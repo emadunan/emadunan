@@ -12,11 +12,23 @@ const AddCell: FC<AddCellProps> = ({ prevCellId, className }) => {
   return (
     <Box component="div" className={className}>
       <Divider>
-        <Button variant="outlined" onClick={() => inserCellAfter(prevCellId, "code")} className="mx-4">Add Code</Button>
-        <Button variant="outlined" onClick={() => inserCellAfter(prevCellId, "text")} className="mx-4">Add Text</Button>
+        <Button
+          variant="outlined"
+          onClick={() => inserCellAfter(prevCellId, "code")}
+          className="mx-4"
+        >
+          Add Code
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => inserCellAfter(prevCellId, "text")}
+          className="mx-4"
+        >
+          Add Text
+        </Button>
       </Divider>
     </Box>
   );
-}
+};
 
 export default AddCell;

@@ -11,9 +11,11 @@ interface CellItemProps {
 
 const CellItem: FC<CellItemProps> = ({ cell }) => {
   if (!cell.type) {
-    return <Box component="div" className="text-red-900">
-      No cells
-    </Box>
+    return (
+      <Box component="div" className="text-red-900">
+        No cells
+      </Box>
+    );
   }
 
   let child: JSX.Element;
@@ -26,14 +28,14 @@ const CellItem: FC<CellItemProps> = ({ cell }) => {
         </Box>
         <CodeCell cell={cell} />
       </Fragment>
-    )
+    );
   } else {
     child = (
       <Fragment>
         <TextEditor cell={cell} />
         <ActionBar id={cell.id} />
       </Fragment>
-    )
+    );
   }
 
   return (
@@ -41,6 +43,6 @@ const CellItem: FC<CellItemProps> = ({ cell }) => {
       {child}
     </Box>
   );
-}
+};
 
 export default CellItem;

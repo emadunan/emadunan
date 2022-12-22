@@ -5,12 +5,12 @@ import { Cell } from "../../state";
 import AddCell from "./add-cell";
 import CellItem from "./cell-item";
 
-interface CellListProps {
-
-}
+interface CellListProps {}
 
 const CellList: FC<CellListProps> = () => {
-  const cells: Cell[] = useSelect(({ cells: { order, data } }) => order.map((id) => data[id]));
+  const cells: Cell[] = useSelect(({ cells: { order, data } }) =>
+    order.map((id) => data[id])
+  );
 
   return (
     <Box component="div">
@@ -18,11 +18,14 @@ const CellList: FC<CellListProps> = () => {
       {cells.map((cell: Cell) => (
         <Fragment key={cell.id}>
           <CellItem cell={cell} />
-          <AddCell prevCellId={cell.id} className="opacity-0 hover:opacity-100"/>
+          <AddCell
+            prevCellId={cell.id}
+            className="opacity-0 hover:opacity-100"
+          />
         </Fragment>
       ))}
     </Box>
   );
-}
+};
 
 export default CellList;

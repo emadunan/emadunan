@@ -6,7 +6,7 @@ export type Direction = "up" | "down";
 export interface MoveCellAction {
   type: ActionType.MOVE_CELL;
   payload: {
-    id: string,
+    id: string;
     direction: Direction;
   };
 }
@@ -19,30 +19,50 @@ export interface DeleteCellAction {
 export interface InsertCellBeforeAction {
   type: ActionType.INSERT_CELL_BEFORE;
   payload: {
-    id: string | null,
-    type: CellType,
+    id: string | null;
+    type: CellType;
   };
 }
 
 export interface InsertCellAfterAction {
   type: ActionType.INSERT_CELL_AFTER;
   payload: {
-    id: string | null,
-    type: CellType,
+    id: string | null;
+    type: CellType;
   };
 }
 
 export interface UpdateCellAction {
   type: ActionType.UPDATE_CELL;
   payload: {
-    id: string,
-    content: string,
+    id: string;
+    content: string;
   };
 }
 
-export type Action = 
+export interface bundleStartAction {
+  type: ActionType.BUNDLE_START;
+  payload: {
+    cellId: string;
+  };
+}
+
+export interface bundleCompleteAction {
+  type: ActionType.BUNDLE_COMPLETE;
+  payload: {
+    cellId: string;
+    bundle: {
+      code: string;
+      error: string;
+    };
+  };
+}
+
+export type Action =
   | MoveCellAction
   | DeleteCellAction
   | InsertCellBeforeAction
   | InsertCellAfterAction
   | UpdateCellAction
+  | bundleStartAction
+  | bundleCompleteAction;
