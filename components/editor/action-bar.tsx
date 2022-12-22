@@ -15,6 +15,7 @@ const ActionBar: FC<ActionBarProps> = ({ id }) => {
   return (
     <Box component="div" className="top-0 right-0 absolute">
       <IconButton
+        sx={{ color: "#fff" }}
         color="primary"
         size="small"
         onClick={() => moveCell(id, "up")}
@@ -22,13 +23,14 @@ const ActionBar: FC<ActionBarProps> = ({ id }) => {
         <ArrowUpwardIcon />
       </IconButton>
       <IconButton
+        sx={{ color: "#fff" }}
         color="primary"
         size="small"
         onClick={() => moveCell(id, "down")}
       >
         <ArrowDownwardIcon />
       </IconButton>
-      <IconButton color="primary" size="small" onClick={() => deleteCell(id)}>
+      <IconButton sx={{ color: "#fff" }} size="small" onClick={() => deleteCell(id)}>
         <CloseIcon />
       </IconButton>
     </Box>

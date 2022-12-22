@@ -13,7 +13,7 @@ const CellList: FC<CellListProps> = () => {
   );
 
   return (
-    <Box component="div">
+    <Box component="div" className="py-0 px-4 bg-slate-700">
       <AddCell prevCellId={null} />
       {cells.map((cell: Cell) => (
         <Fragment key={cell.id}>

@@ -11,16 +11,16 @@ const AddCell: FC<AddCellProps> = ({ prevCellId, className }) => {
   const { inserCellAfter } = useActions();
   return (
     <Box component="div" className={className}>
-      <Divider>
+      <Divider >
         <Button
-          variant="outlined"
+          variant="contained"
           onClick={() => inserCellAfter(prevCellId, "code")}
           className="mx-4"
         >
           Add Code
         </Button>
         <Button
-          variant="outlined"
+          variant="contained"
           onClick={() => inserCellAfter(prevCellId, "text")}
           className="mx-4"
         >
