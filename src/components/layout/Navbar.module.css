@@ -1,0 +1,30 @@
+.container {
+  height: var(--header-height);
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  box-shadow: 0 2px 5px rgba(var(--primary-rgb), 0.3);
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.link {
+  color: var(--min);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+}
+
+.link:hover {
+  background-color: var(--primary-hover);
+}
+
+.active {
+  background-color: var(--accent);
+}

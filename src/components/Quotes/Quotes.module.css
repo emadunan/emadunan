@@ -1,0 +1,12 @@
+.container {
+  padding: 6rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.quotes {
+  width: 50rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}

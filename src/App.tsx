@@ -1,21 +1,23 @@
-import './App.css'
-import Bio from './components/Bio'
-import Contact from './components/Contact'
-import Hero from './components/Hero'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import HomePage from './pages/Home';
+import QuotesPage from './pages/Quotes';
+import Navbar from './components/layout/Navbar';
+import Contact from './components/layout/Contact';
 
 function App() {
-
   return (
-    <div>
-      <Hero />
-      <Bio />
-      <Skills />
-      <Projects />
+    <>
+      <Navbar />
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/quotes" element={<QuotesPage />} />
+        </Routes>
+      </main>
       <Contact />
-    </div>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
