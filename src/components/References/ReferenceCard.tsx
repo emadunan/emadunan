@@ -5,11 +5,17 @@ interface ReferenceCardProps {
   title: string;
   description: string;
   url: string;
+  category: string;
 }
 
-const ReferenceCard: React.FC<ReferenceCardProps> = ({ title, description, url }) => {
+const ReferenceCard: React.FC<ReferenceCardProps> = ({ title, description, url, category }) => {
+  const className =
+    category != null
+      ? `${styles.referenceCard} ${styles[`category_${category.toLowerCase().replace(/[^a-z]/g, "")}`]}`
+      : styles.referenceCard;
+
   return (
-    <a className={styles.referenceCard} href={url} target="_blank" rel="noopener noreferrer">
+    <a className={className} href={url} target="_blank" rel="noopener noreferrer">
       <div className={styles.cardContent}>
         <h3>{title}</h3>
         <p>{description}</p>

@@ -1,24 +1,21 @@
 .referenceCard {
   height: 15rem;
-  background-color: var(--background);
-  border: 1px solid var(--primary);
+  border: 1px solid;
   border-radius: 2px;
   padding: 1.25rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: var(--text);
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .referenceCard:hover {
-  background-color: var(--background-hover);
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(var(--primary-hover-rgb), 0.25);
 }
 
+/* ==== Base Content Styles ==== */
 .cardContent {
   display: flex;
   flex-direction: column;
@@ -36,7 +33,7 @@
   line-height: 1.5rem;
   color: var(--gray);
   margin-bottom: 0.75rem;
-  flex-grow: 1; /* This pushes the .visitLink to bottom */
+  flex-grow: 1;
 }
 
 .visitLink {
@@ -45,4 +42,105 @@
   font-weight: 600;
   text-decoration: underline;
   margin-top: auto;
+}
+
+/* ==== Category Variants ==== */
+
+.category_mobile {
+  background-color: var(--color-mobile);
+  border-color: #facc15;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.15);
+}
+
+.category_mobile:hover {
+  background-color: var(--color-mobile-hover);
+  box-shadow: 0 6px 16px rgba(250, 204, 21, 0.25);
+}
+
+.category_frontend {
+  background-color: var(--color-frontend);
+  border-color: #14b8a6;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+}
+
+.category_frontend:hover {
+  background-color: var(--color-frontend-hover);
+  box-shadow: 0 6px 16px rgba(20, 184, 166, 0.25);
+}
+
+.category_designuiresources {
+  background-color: var(--color-designuiresources);
+  border-color: #f87171;
+  box-shadow: 0 4px 12px rgba(248, 113, 113, 0.15);
+}
+
+.category_designuiresources:hover {
+  background-color: var(--color-designuiresources-hover);
+  box-shadow: 0 6px 16px rgba(248, 113, 113, 0.25);
+}
+
+.category_backend {
+  background-color: var(--color-backend);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.category_backend:hover {
+  background-color: var(--color-backend-hover);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+}
+
+.category_devopstesting {
+  background-color: var(--color-devops);
+  border-color: #64748b;
+  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.15);
+}
+
+.category_devopstesting:hover {
+  background-color: var(--color-devops-hover);
+  box-shadow: 0 6px 16px rgba(100, 116, 139, 0.25);
+}
+
+.category_infrastructurehosting {
+  background-color: var(--color-infra);
+  border-color: #8b5cf6;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+}
+
+.category_infrastructurehosting:hover {
+  background-color: var(--color-infra-hover);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.25);
+}
+
+.category_cloudplatformsdeveloperconsoles {
+  background-color: var(--color-cloud);
+  border-color: #fb923c;
+  box-shadow: 0 4px 12px rgba(251, 146, 60, 0.15);
+}
+
+.category_cloudplatformsdeveloperconsoles:hover {
+  background-color: var(--color-cloud-hover);
+  box-shadow: 0 6px 16px rgba(251, 146, 60, 0.25);
+}
+
+.category_securitypentesting {
+  background-color: var(--color-security);
+  border-color: #ef4444;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.category_securitypentesting:hover {
+  background-color: var(--color-security-hover);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
+}
+
+.category_docstools {
+  background-color: var(--color-docs);
+  border-color: #22c55e;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
+.category_docstools:hover {
+  background-color: var(--color-docs-hover);
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.25);
 }

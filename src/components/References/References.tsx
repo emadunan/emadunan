@@ -13,6 +13,7 @@ const References: React.FC = () => {
             {items.map((item, index) => (
               <ReferenceCard
                 key={index}
+                category={category}
                 title={item.title}
                 description={item.description}
                 url={item.link}

@@ -19,14 +19,14 @@ export default function Navbar() {
           className={`${styles.link} ${location.pathname === '/references' ? styles.active : ''
             }`}
         >
-          References
+          What I Use
         </Link>
         <Link
           to="/quotes"
           className={`${styles.link} ${location.pathname === '/quotes' ? styles.active : ''
             }`}
         >
-          Quotes
+          My Quotes
         </Link>
       </nav>
     </header>

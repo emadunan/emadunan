@@ -14,7 +14,8 @@
   --background-hover-rgb: 198, 239, 234;
 
   /* Primary Theme */
-  --primary: #1fb6aa; /* Teal */
+  --primary: #1fb6aa;
+  /* Teal */
   --primary-rgb: 31, 182, 170;
   --primary-hover: #159e94;
   --primary-hover-rgb: 21, 158, 148;
@@ -45,6 +46,43 @@
 
   --highlight: #afffcb;
   --highlight-rgb: 175, 255, 203;
+
+  /* Optimized Pastel Backgrounds */
+  /* Mobile */
+  --color-mobile: #FEF9C3;
+  --color-mobile-hover: #FDE68A;
+
+  /* Frontend */
+  --color-frontend: #CCFBF1;
+  --color-frontend-hover: #99F6E4;
+
+  /* Design / UI Resources */
+  --color-designuiresources: #ffe4e1;
+  --color-designuiresources-hover: #fbc4bc;
+
+  /* Backend */
+  --color-backend: #DBEAFE;
+  --color-backend-hover: #BFDBFE;
+
+  /* DevOps / Testing */
+  --color-devops: #E2E8F0;
+  --color-devops-hover: #CBD5E1;
+
+  /* Infrastructure / Hosting */
+  --color-infra: #EDE9FE;
+  --color-infra-hover: #DDD6FE;
+
+  /* Cloud Platforms */
+  --color-cloud: #FFEDD5;
+  --color-cloud-hover: #FED7AA;
+
+  /* Security / Standards */
+  --color-security: #FEE2E2;
+  --color-security-hover: #FCA5A5;
+
+  /* Docs / Tools */
+  --color-docs: #D1FAE5;
+  --color-docs-hover: #A7F3D0;
 
   /* Layout Sizes */
   --header-height: 4rem;
