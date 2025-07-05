@@ -1,30 +1,44 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "🚀 Starting Portfolio Deployment..."
 
-# Define paths
-DIST_DIR="/home/emad/projects/emadunan/apps/admin/dist"
+# Configuration
+PROJECT_ROOT="/home/emad/projects/emadunan"
+DIST_DIR="$PROJECT_ROOT/dist"
 TARGET_DIR="/var/www/emadunan.com"
 
-# Ensure dist directory exists
+# Step 1: Navigate to project root
+echo "📁 Moving to project directory..."
+cd "$PROJECT_ROOT" || { echo "❌ Project directory not found"; exit 1; }
+
+# Step 2: Clean previous build (optional if vite handles it internally)
+# echo "🧹 Cleaning old build..."
+# rm -rf "$DIST_DIR"
+
+# Step 3: Build the app
+echo "🛠️ Building portfolio with Vite..."
+npm ci
+npm run build
+
+# Step 4: Verify dist exists
 if [ ! -d "$DIST_DIR" ]; then
-  echo "❌ Build directory does not exist: $DIST_DIR"
+  echo "❌ Build failed: directory '$DIST_DIR' not found"
   exit 1
 fi
 
-# Deploy static site to web root
-echo "📦 Copying files to $TARGET_DIR..."
+# Step 5: Deploy to server root
+echo "📦 Deploying to $TARGET_DIR..."
 sudo rm -rf "${TARGET_DIR:?}/"*
-sudo cp -ru "$DIST_DIR/"* "$TARGET_DIR/"
+sudo cp -r "$DIST_DIR/"* "$TARGET_DIR/"
 
-# Set proper permissions
-echo "🔐 Setting ownership and permissions..."
+# Step 6: Fix permissions
+echo "🔐 Setting permissions for $TARGET_DIR..."
 sudo chown -R www-data:www-data "$TARGET_DIR"
 sudo chmod -R 755 "$TARGET_DIR"
 
-# Test and restart NGINX
-echo "🔄 Restarting NGINX..."
-sudo nginx -t && sudo systemctl restart nginx.service
+# Step 7: Reload NGINX
+echo "🔄 Reloading NGINX..."
+sudo nginx -t && sudo systemctl reload nginx
 
 echo "✅ Portfolio Deployment Completed Successfully!"
