@@ -13,8 +13,8 @@ function App() {
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/quotes" element={<QuotesPage />} />
-          <Route path="/references" element={<References />} />
+          <Route path="/what-i-use" element={<References />} />
+          <Route path="/my-quotes" element={<QuotesPage />} />
         </Routes>
       </main>
       <Contact />

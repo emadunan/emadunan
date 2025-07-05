@@ -15,14 +15,14 @@ export default function Navbar() {
           Home
         </Link>
         <Link
-          to="/references"
+          to="/what-i-use"
           className={`${styles.link} ${location.pathname === '/references' ? styles.active : ''
             }`}
         >
           What I Use
         </Link>
         <Link
-          to="/quotes"
+          to="/my-quotes"
           className={`${styles.link} ${location.pathname === '/quotes' ? styles.active : ''
             }`}
         >
