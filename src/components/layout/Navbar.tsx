@@ -9,17 +9,22 @@ export default function Navbar() {
       <nav className={styles.nav}>
         <Link
           to="/"
-          className={`${styles.link} ${
-            location.pathname === '/' ? styles.active : ''
-          }`}
+          className={`${styles.link} ${location.pathname === '/' ? styles.active : ''
+            }`}
         >
           Home
         </Link>
         <Link
+          to="/references"
+          className={`${styles.link} ${location.pathname === '/references' ? styles.active : ''
+            }`}
+        >
+          References
+        </Link>
+        <Link
           to="/quotes"
-          className={`${styles.link} ${
-            location.pathname === '/quotes' ? styles.active : ''
-          }`}
+          className={`${styles.link} ${location.pathname === '/quotes' ? styles.active : ''
+            }`}
         >
           Quotes
         </Link>

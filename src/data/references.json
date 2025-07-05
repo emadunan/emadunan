@@ -1,0 +1,188 @@
+{
+  "Mobile": [
+    {
+      "title": "React Native",
+      "description": "A framework for building native mobile apps using React and JavaScript.",
+      "link": "https://reactnative.dev/"
+    },
+    {
+      "title": "Expo",
+      "description": "A platform and set of tools built around React Native to help you build, deploy, and iterate on iOS, Android, and web apps.",
+      "link": "https://expo.dev/"
+    }
+  ],
+  "Frontend": [
+    {
+      "title": "ECMAScript (ECMA-262)",
+      "description": "The standard specification on which JavaScript is based, maintained by ECMA International. Defines core language features.",
+      "link": "https://tc39.es/ecma262/"
+    },
+    {
+      "title": "MDN Web Docs",
+      "description": "Comprehensive documentation for HTML, CSS, and JavaScript.",
+      "link": "https://developer.mozilla.org/"
+    },
+    {
+      "title": "Can I Use",
+      "description": "Browser support tables for modern web technologies.",
+      "link": "https://caniuse.com/"
+    },
+    {
+      "title": "React",
+      "description": "A JavaScript library for building user interfaces.",
+      "link": "https://reactjs.org/"
+    },
+    {
+      "title": "Redux Toolkit",
+      "description": "The official, recommended way to write Redux logic. Simplifies store setup, reduces boilerplate, and includes powerful tools like createSlice and createAsyncThunk.",
+      "link": "https://redux-toolkit.js.org/"
+    },
+    {
+      "title": "Vite",
+      "description": "A fast, opinionated frontend build tool that serves your code via native ESM and bundles it with lightning-fast Rollup.",
+      "link": "https://vitejs.dev/"
+    },
+    {
+      "title": "Next.js",
+      "description": "A full-stack React framework with built-in SSR, API routes, and file-based routing.",
+      "link": "https://nextjs.org/"
+    }
+  ],
+  "Backend": [
+    {
+      "title": "SQLite",
+      "description": "A lightweight, serverless, self-contained SQL database engine, ideal for embedded use.",
+      "link": "https://www.sqlite.org/"
+    },
+    {
+      "title": "PostgreSQL",
+      "description": "A powerful, open-source object-relational database system.",
+      "link": "https://www.postgresql.org/"
+    },
+    {
+      "title": "Node.js",
+      "description": "A JavaScript runtime built on Chrome’s V8 engine for building scalable network applications.",
+      "link": "https://nodejs.org/"
+    },
+    {
+      "title": "Express.js",
+      "description": "A minimal and flexible Node.js web application framework providing a robust set of features.",
+      "link": "https://expressjs.com/"
+    },
+    {
+      "title": "NestJS",
+      "description": "A progressive Node.js framework for building efficient server-side applications.",
+      "link": "https://nestjs.com/"
+    },
+    {
+      "title": "TypeORM",
+      "description": "A modern ORM for TypeScript and JavaScript (ES7+), supporting Active Record and Data Mapper patterns.",
+      "link": "https://typeorm.io/"
+    },
+    {
+      "title": "Prisma",
+      "description": "Next-generation Node.js and TypeScript ORM. Type-safe, performant, and intuitive for modern app development.",
+      "link": "https://www.prisma.io/"
+    },
+    {
+      "title": "Redis",
+      "description": "An open-source, in-memory data structure store, used as a database, cache, and message broker.",
+      "link": "https://redis.io/"
+    },
+    {
+      "title": "Socket.IO",
+      "description": "A real-time bidirectional communication library for web apps using WebSockets and fallbacks.",
+      "link": "https://socket.io/"
+    }
+  ],
+  "DevOps / Testing": [
+    {
+      "title": "Git",
+      "description": "A distributed version control system for tracking changes in source code during software development.",
+      "link": "https://git-scm.com/"
+    },
+    {
+      "title": "GitHub",
+      "description": "A web-based platform for hosting and collaborating on Git repositories, widely used for open source and enterprise development.",
+      "link": "https://github.com/"
+    },
+    {
+      "title": "Nginx",
+      "description": "A high-performance web server, reverse proxy, and load balancer for HTTP, HTTPS, and more.",
+      "link": "https://nginx.org/"
+    },
+    {
+      "title": "PM2",
+      "description": "Production process manager for Node.js applications.",
+      "link": "https://pm2.keymetrics.io/"
+    },
+    {
+      "title": "Docker",
+      "description": "An open platform for developing, shipping, and running applications using containerization.",
+      "link": "https://www.docker.com/"
+    },
+    {
+      "title": "Vitest",
+      "description": "A blazing fast unit test framework powered by Vite.",
+      "link": "https://vitest.dev/"
+    }
+  ],
+  "Infrastructure / Hosting": [
+    {
+      "title": "Vultr",
+      "description": "Cloud computing platform offering high-performance SSD VPS, bare metal, and Kubernetes hosting worldwide.",
+      "link": "https://www.vultr.com/"
+    },
+    {
+      "title": "DigitalOcean",
+      "description": "Cloud infrastructure provider offering scalable compute, storage, and networking solutions, popular among developers and startups.",
+      "link": "https://www.digitalocean.com/"
+    }
+  ],
+  "Cloud Platforms / Developer Consoles": [
+    {
+      "title": "OpenAI",
+      "description": "AI research and deployment company offering APIs for language models, embeddings, image generation, and more.",
+      "link": "https://openai.com/"
+    },
+    {
+      "title": "Google Cloud Console",
+      "description": "Web-based UI for managing Google Cloud services including compute, storage, databases, and APIs.",
+      "link": "https://console.cloud.google.com/"
+    },
+    {
+      "title": "Facebook for Developers",
+      "description": "Platform to manage Facebook apps, access APIs like Facebook Login, Graph API, and integrate social features.",
+      "link": "https://developers.facebook.com/"
+    }
+  ],
+  "Security / Standards": [
+    {
+      "title": "Agile Manifesto",
+      "description": "The foundational document outlining the core values and principles of Agile software development.",
+      "link": "https://agilemanifesto.org/"
+    },
+    {
+      "title": "CIS Benchmarks",
+      "description": "Security best practices for configuring systems and cloud infrastructure.",
+      "link": "https://www.cisecurity.org/cis-benchmarks/"
+    },
+    {
+      "title": "OWASP",
+      "description": "Open Web Application Security Project – web app security best practices.",
+      "link": "https://owasp.org/"
+    }
+  ],
+  "Docs / Tools": [
+    {
+      "title": "Roadmap.sh",
+      "description": "Community-driven collection of comprehensive roadmaps, guides, and resources for developers in various domains.",
+      "link": "https://roadmap.sh/"
+    },
+    {
+      "title": "DevDocs",
+      "description": "Fast, offline-friendly developer documentation browser.",
+      "link": "https://devdocs.io/"
+    }
+  ]
+}

@@ -28,8 +28,8 @@ const Contact: React.FC = () => {
         </li>
         <li>
           <strong>Portfolio:</strong>{" "}
-          <a href="https://emadunan.github.io" target="_blank" rel="noopener noreferrer">
-            emadunan.github.io
+          <a href="https://emadunan.com" target="_blank" rel="noopener noreferrer">
+            emadunan.com
           </a>
         </li>
         <li>

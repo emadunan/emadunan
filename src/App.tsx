@@ -4,6 +4,7 @@ import HomePage from './pages/Home';
 import QuotesPage from './pages/Quotes';
 import Navbar from './components/layout/Navbar';
 import Contact from './components/layout/Contact';
+import References from './components/References/References';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/quotes" element={<QuotesPage />} />
+          <Route path="/references" element={<References />} />
         </Routes>
       </main>
       <Contact />

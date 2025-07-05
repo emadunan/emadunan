@@ -1,0 +1,48 @@
+.referenceCard {
+  height: 15rem;
+  background-color: var(--background);
+  border: 1px solid var(--primary);
+  border-radius: 2px;
+  padding: 1.25rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
+}
+
+.referenceCard:hover {
+  background-color: var(--background-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(var(--primary-hover-rgb), 0.25);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cardContent h3 {
+  font-size: 1.25rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.cardContent p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--gray);
+  margin-bottom: 0.75rem;
+  flex-grow: 1; /* This pushes the .visitLink to bottom */
+}
+
+.visitLink {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  margin-top: auto;
+}

@@ -1,0 +1,20 @@
+.referencesPage {
+  padding: 2rem;
+  background-color: var(--min);
+}
+
+.categorySection {
+  margin-bottom: 3rem;
+}
+
+.categoryTitle {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 3rem;
+}
