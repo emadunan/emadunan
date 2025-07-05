@@ -3,6 +3,12 @@ set -euo pipefail
 
 echo "🚀 Starting Portfolio Deployment..."
 
+# Load user profile
+source ~/.bashrc || source ~/.profile
+
+# Ensure Node.js tools are in the PATH
+export PATH=$HOME/.nvm/versions/node/v22.14.0/bin:$PATH
+
 # Configuration
 PROJECT_ROOT="/home/emad/projects/emadunan"
 DIST_DIR="$PROJECT_ROOT/dist"
