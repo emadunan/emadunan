@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import styles from './App.module.css';
 import HomePage from './pages/Home';
 import QuotesPage from './pages/Quotes';
 import Contact from './components/layout/Contact';
@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="content">
+      <main className={styles.main}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/what-i-use" element={<References />} />

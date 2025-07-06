@@ -1,12 +1,26 @@
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import type { PageLink } from '../../types/PageLink.type';
+import type React from 'react';
 
-export default function Navbar() {
+interface Props {
+  links: PageLink[]
+}
+
+export const Navbar: React.FC<Props> = ({ links }) => {
   const location = useLocation();
 
   return (
     <nav className={styles.nav}>
-      <Link
+      {links.map(link => <Link
+        to={link.to}
+        className={`${styles.link} ${location.pathname === link.match ? styles.active : ''}`}
+      >
+        {link.label}
+      </Link>)}
+
+
+      {/* <Link
         to="/"
         className={`${styles.link} ${location.pathname === '/' ? styles.active : ''
           }`}
@@ -18,7 +32,7 @@ export default function Navbar() {
         className={`${styles.link} ${location.pathname === '/references' ? styles.active : ''
           }`}
       >
-        What <span className={styles.iuse}>I Use</span>
+        What I Use
       </Link>
       <Link
         to="/my-quotes"
@@ -33,7 +47,9 @@ export default function Navbar() {
           }`}
       >
         My Quotes
-      </Link>
+      </Link> */}
     </nav>
   );
 }
+
+export default Navbar;
