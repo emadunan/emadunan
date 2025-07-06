@@ -15,7 +15,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 2rem;
   margin: 0 1.5rem;
 }
@@ -51,4 +51,10 @@
   left: 0;
   color: var(--accent);
   font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
