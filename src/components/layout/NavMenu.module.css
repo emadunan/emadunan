@@ -29,7 +29,7 @@
   right: 0;
   height: 100dvh;
   width: 204px;
-  background-color: var(--secondary);
+  background-color: var(--background);
   box-shadow: -2px 0 8px rgba(var(--accent-rgb), 0.2);
   padding: 2rem 1.5rem;
   display: flex;
