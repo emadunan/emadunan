@@ -13,6 +13,7 @@ export const Navbar: React.FC<Props> = ({ links }) => {
   return (
     <nav className={styles.nav}>
       {links.map(link => <Link
+        key={link.label}
         to={link.to}
         className={`${styles.link} ${location.pathname === link.match ? styles.active : ''}`}
       >
