@@ -6,11 +6,13 @@ import HomePage from './pages/Home';
 import QuotesPage from './pages/Quotes';
 import QualificationsPage from './pages/Qualifications';
 import ReferencesPage from './pages/References';
+import ScrollToTop from './components/helpers/ScrollToTop';
 
 function App() {
   return (
     <>
       <Header />
+      <ScrollToTop />
       <main className={styles.main}>
         <Routes>
           <Route path="/" element={<HomePage />} />
