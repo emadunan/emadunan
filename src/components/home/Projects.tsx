@@ -67,7 +67,7 @@ const Projects: React.FC = () => {
           <h3>MOI.gov.eg – Egyptian Ministry of Interior Portal</h3>
           <div className={styles.links}>
             <a
-              href="https://amen24.org"
+              href="https://moi.gov.eg"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}
