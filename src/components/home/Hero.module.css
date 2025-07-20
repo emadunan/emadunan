@@ -25,13 +25,20 @@
   color: var(--accent);
 }
 
-.subheading {
+.subheading1 {
   font-size: 1.25rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 600px;
+  margin-bottom: 1rem;
+  max-width: 37.5rem;
   /* margin-inline: auto; */
   color: var(--text);
+}
+
+.subheading2 {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 37.5rem;
+  color: var(--gray-hover);
 }
 
 .cta {
