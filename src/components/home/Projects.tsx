@@ -34,17 +34,21 @@ const Projects: React.FC = () => {
           <div className={styles.left}>
             <h4 className={styles.subTitle}>Overview</h4>
             <p>
-              Amen24.org is a comprehensive Christian platform that presents Bible content,
-              a verse search engine, a glossary, and a library — all fully multilingual. I’m the
-              sole developer and architect of the platform; all other contributors serve as content moderators.
+              Amen24.org is a comprehensive Christian platform that presents
+              Bible content, a verse search engine, a glossary, and a library —
+              all fully multilingual. I’m the sole developer and architect of
+              the platform; all other contributors serve as content moderators.
             </p>
 
             <p>
-              The project follows a robust monorepo architecture using <em>NestJS</em>, <em>Next.js</em>,
-              and <em>React</em>, backed by a <em>PostgreSQL</em> database. It leverages <em>i18next</em> for
-              multilingual support and includes shared packages for UI, utilities, and language data.
-              Authentication uses access and refresh tokens via <em>Passport.js</em>, while <em>RTK Query</em>
-              powers the API layer with token auto-refreshing and caching for reliability.
+              The project follows a robust monorepo architecture using{" "}
+              <em>NestJS</em>, <em>Next.js</em>, and <em>React</em>, backed by a{" "}
+              <em>PostgreSQL</em> database. It leverages <em>i18next</em> for
+              multilingual support and includes shared packages for UI,
+              utilities, and language data. Authentication uses access and
+              refresh tokens via <em>Passport.js</em>, while <em>RTK Query</em>
+              powers the API layer with token auto-refreshing and caching for
+              reliability.
             </p>
           </div>
 
@@ -81,21 +85,43 @@ const Projects: React.FC = () => {
           <div className={styles.left}>
             <h4 className={styles.subTitle}>Overview</h4>
             <p>
-              The official digital portal of the Egyptian Ministry of Interior, providing critical public access to media content, ministry news, e-services, and internal sector subsites.
+              The official digital portal of the Egyptian Ministry of Interior,
+              providing critical public access to media content, ministry news,
+              e-services, and internal sector subsites.
             </p>
             <p>
-              As the project lead, I manage a cross-functional team of 9 developers with varied expertise across .NET, SharePoint, Java, and Swift. The backend is powered by Microsoft SQL Server and a unified .NET API layer. I oversee technical delivery, coordination, and agile planning—ensuring seamless collaboration across web and mobile platforms.
+              As the project lead, I manage a cross-functional team of 9
+              developers with varied expertise across .NET, SharePoint, Java,
+              and Swift. The backend is powered by Microsoft SQL Server and a
+              unified .NET API layer. I oversee technical delivery,
+              coordination, and agile planning—ensuring seamless collaboration
+              across web and mobile platforms.
             </p>
           </div>
 
           <div className={styles.right}>
             <h4 className={styles.subTitle}>Key Features</h4>
             <ul className={styles.bullets}>
-              <li>Central portal for Ministry news, public statements, and key announcements.</li>
-              <li>Dynamic media center showcasing official news, reports, and video content.</li>
-              <li>Subsites for ministry sectors and departments with modular content delivery.</li>
-              <li>Seamless mobile integration via Android and iOS apps using shared API services.</li>
-              <li>Public e-services offering secure access to citizen-focused digital applications.</li>
+              <li>
+                Central portal for Ministry news, public statements, and key
+                announcements.
+              </li>
+              <li>
+                Dynamic media center showcasing official news, reports, and
+                video content.
+              </li>
+              <li>
+                Subsites for ministry sectors and departments with modular
+                content delivery.
+              </li>
+              <li>
+                Seamless mobile integration via Android and iOS apps using
+                shared API services.
+              </li>
+              <li>
+                Public e-services offering secure access to citizen-focused
+                digital applications.
+              </li>
             </ul>
           </div>
         </div>
@@ -111,13 +137,17 @@ const Projects: React.FC = () => {
           <div className={styles.left}>
             <h4 className={styles.subTitle}>Overview</h4>
             <p>
-              I have contributed to the development and maintenance of highly sensitive and internal police systems
-              serving critical operational and administrative needs within law enforcement. Due to confidentiality and
-              national security protocols, detailed information about these systems is not publicly accessible.
+              I have contributed to the development and maintenance of highly
+              sensitive and internal police systems serving critical operational
+              and administrative needs within law enforcement. Due to
+              confidentiality and national security protocols, detailed
+              information about these systems is not publicly accessible.
             </p>
             <p>
-              My role involved collaborating with secure internal teams, applying best practices in software architecture,
-              problem solving, and ensuring strict compliance with government IT security standards.
+              My role involved collaborating with secure internal teams,
+              applying best practices in software architecture, problem solving,
+              and ensuring strict compliance with government IT security
+              standards.
             </p>
           </div>
 

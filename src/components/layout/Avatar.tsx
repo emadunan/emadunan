@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './Avatar.module.css'
+import React from "react";
+import styles from "./Avatar.module.css";
 
 const Avatar: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const Avatar: React.FC = () => {
         className={styles.avatar}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Avatar
+export default Avatar;

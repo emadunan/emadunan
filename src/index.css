@@ -49,40 +49,40 @@
 
   /* Optimized Pastel Backgrounds */
   /* Mobile */
-  --color-mobile: #FEF9C3;
-  --color-mobile-hover: #FDE68A;
+  --color-mobile: #fef9c3;
+  --color-mobile-hover: #fde68a;
 
   /* Frontend */
-  --color-frontend: #CCFBF1;
-  --color-frontend-hover: #99F6E4;
+  --color-frontend: #ccfbf1;
+  --color-frontend-hover: #99f6e4;
 
   /* Design / UI Resources */
   --color-designuiresources: #ffe4e1;
   --color-designuiresources-hover: #fbc4bc;
 
   /* Backend */
-  --color-backend: #DBEAFE;
-  --color-backend-hover: #BFDBFE;
+  --color-backend: #dbeafe;
+  --color-backend-hover: #bfdbfe;
 
   /* DevOps / Testing */
-  --color-devops: #E2E8F0;
-  --color-devops-hover: #CBD5E1;
+  --color-devops: #e2e8f0;
+  --color-devops-hover: #cbd5e1;
 
   /* Infrastructure / Hosting */
-  --color-infra: #EDE9FE;
-  --color-infra-hover: #DDD6FE;
+  --color-infra: #ede9fe;
+  --color-infra-hover: #ddd6fe;
 
   /* Cloud Platforms */
-  --color-cloud: #FFEDD5;
-  --color-cloud-hover: #FED7AA;
+  --color-cloud: #ffedd5;
+  --color-cloud-hover: #fed7aa;
 
   /* Security / Standards */
-  --color-security: #FEE2E2;
-  --color-security-hover: #FCA5A5;
+  --color-security: #fee2e2;
+  --color-security-hover: #fca5a5;
 
   /* Docs / Tools */
-  --color-docs: #D1FAE5;
-  --color-docs-hover: #A7F3D0;
+  --color-docs: #d1fae5;
+  --color-docs-hover: #a7f3d0;
 
   /* Layout Sizes */
   --header-height: 4rem;

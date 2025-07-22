@@ -1,6 +1,6 @@
-import React from 'react';
-import Qualification from './Qualification';
-import styles from './QualificationsList.module.css';
+import React from "react";
+import Qualification from "./Qualification";
+import styles from "./QualificationsList.module.css";
 import qualifications from "../../data/qualifications.json";
 
 const QualificationsList: React.FC = () => {
@@ -11,6 +11,6 @@ const QualificationsList: React.FC = () => {
       ))}
     </div>
   );
-}
+};
 
 export default QualificationsList;

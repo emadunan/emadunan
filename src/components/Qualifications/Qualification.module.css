@@ -4,7 +4,9 @@
   padding: 1.5rem;
   border-radius: 2px;
   box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {

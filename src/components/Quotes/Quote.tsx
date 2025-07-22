@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './Quote.module.css';
+import React from "react";
+import styles from "./Quote.module.css";
 
 interface Props {
   text: string;
@@ -17,10 +17,10 @@ const Quote: React.FC<Props> = ({ text, createdAt }) => {
 
 function formatDate(dateString: string) {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 }
 

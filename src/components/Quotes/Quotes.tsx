@@ -1,7 +1,7 @@
-import React from 'react';
-import data from '../../data/quotes.json';
-import Quote from './Quote';
-import styles from './Quotes.module.css';
+import React from "react";
+import data from "../../data/quotes.json";
+import Quote from "./Quote";
+import styles from "./Quotes.module.css";
 
 const Quotes: React.FC = () => {
   return (

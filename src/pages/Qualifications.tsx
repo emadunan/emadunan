@@ -1,8 +1,8 @@
-import React from 'react';
-import QualificationsList from '../components/Qualifications/QualificationsList';
+import React from "react";
+import QualificationsList from "../components/Qualifications/QualificationsList";
 
 const QualificationsPage: React.FC = () => {
-  return <QualificationsList />
-}
+  return <QualificationsList />;
+};
 
 export default QualificationsPage;
