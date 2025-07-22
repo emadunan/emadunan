@@ -28,11 +28,13 @@ const References: React.FC = () => {
 
   return (
     <div className={styles.referencesPage}>
-      <input
-        placeholder="Filter resources..."
-        onChange={handleChange}
-        className={styles.filterInput}
-      />
+      <div className={styles.filterContainer}>
+        <input
+          placeholder="Filter resources..."
+          onChange={handleChange}
+          className={styles.filterInput}
+        />
+      </div>
 
       {data.map(([category, items]) => (
         <section key={category} className={styles.categorySection}>

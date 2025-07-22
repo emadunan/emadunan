@@ -336,21 +336,25 @@ export const referencesData: Record<
       link: "https://owasp.org/",
     },
     {
-      title: "OSINT Tools",
-      description:
-        "Hands-on experience with various open-source intelligence tools for reconnaissance and footprinting.",
-      link: "https://osintframework.com/",
+      title: "OSINT Framework",
+      description: "A structured collection of OSINT tools and resources, organized by categories to aid in intelligence gathering and investigations.",
+      link: "https://osintframework.com/"
     },
     {
       title: "Maigret",
       description:
-        "Tool for collecting a digital footprint of a username across 500+ websites.",
+        "OSINT Tool for collecting a digital footprint of a username across 500+ websites.",
       link: "https://github.com/soxoj/maigret",
+    },
+    {
+      title: "SpiderFoot",
+      description: "An open-source OSINT automation tool that scans domains, IPs, emails, and more to gather intelligence from hundreds of sources automatically.",
+      link: "https://www.spiderfoot.net/"
     },
     {
       title: "theHarvester",
       description:
-        "Tool for gathering emails, subdomains, hosts, employee names, and more from public sources.",
+        "OSINT Tool for gathering emails, subdomains, hosts, employee names, and more from public sources.",
       link: "https://github.com/laramies/theHarvester",
     },
     {
