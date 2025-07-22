@@ -24,7 +24,8 @@ cd "$PROJECT_ROOT" || { echo "❌ Project directory not found"; exit 1; }
 
 # Step 3: Build the app
 echo "🛠️ Building portfolio with Vite..."
-npm ci
+# npm ci
+npm i
 npm run build
 
 # Step 4: Verify dist exists
