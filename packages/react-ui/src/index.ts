@@ -1,6 +1,4 @@
-import "./styles/reset.css";
-import "./styles/base.css";
-import "./styles/tokens.css";
+import "./styles";
 
 export * from "./layout";
 export * from "./form";

@@ -1,9 +1,9 @@
 {
   "extends": "@emadunan/typescript-config/react-library.json",
   "compilerOptions": {
-    "outDir": "dist",
+    "module": "esnext",
     "noEmit": true,
+    "moduleResolution": "Bundler",
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "tsconfig.build.json"]
 }
