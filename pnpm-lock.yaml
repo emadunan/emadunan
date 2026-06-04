@@ -171,9 +171,15 @@ importers:
       '@types/react-dom':
         specifier: 19.1.1
         version: 19.1.1(@types/react@19.1.0)
+      '@vitejs/plugin-react':
+        specifier: ^5.0.3
+        version: 5.0.4(vite@7.1.10(@types/node@24.8.1))
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.2.0)
+      vite:
+        specifier: ^7.1.7
+        version: 7.1.10(@types/node@24.8.1)
 
   packages/shared-utils: {}
 

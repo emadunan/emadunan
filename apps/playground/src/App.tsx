@@ -18,6 +18,7 @@ import {
   AutocompleteInput,
   RadioGroup,
   Pagination,
+  Textarea,
 } from "@emadunan/react-ui";
 import { IoMdArrowDropdown } from "react-icons/io";
 
@@ -158,6 +159,8 @@ function App() {
           prev: "السابق",
           next: "التالي"
         }}/>
+
+        <Textarea label="Test Text Area" value={"I love ...."}/>
       </Main>
       <Footer>
         <p>General Administration of Information Technology.</p>
