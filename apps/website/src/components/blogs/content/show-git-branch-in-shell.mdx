@@ -1,0 +1,60 @@
+# Show Git Branch Name in Linux Shell (Bash)
+
+To display the current Git branch name in your terminal prompt, you can modify your shell configuration file — usually `~/.bashrc` — by adding a small helper function and customizing the `PS1` prompt.
+
+---
+
+Find the default prompt definition in the below code block.
+
+```bash
+if [ "$color_prompt" = yes ]; then
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+```
+
+And replace it with this new one
+
+```bash
+# Add git branch if it's present to PS1
+
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+if [ "$color_prompt" = yes ]; then
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+else
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
+fi
+```
+
+---
+
+## 🛠️ How It Works
+
+- The `parse_git_branch` function uses `git branch` and filters the current branch with `sed`.
+- The prompt (`PS1`) is modified to call this function using `$(parse_git_branch)`.
+- The output is shown in red using ANSI escape sequences (`\033[01;31m`).
+- If you're not in a Git repo, the prompt behaves as usual.
+
+---
+
+## ✅ Apply the Changes
+
+After modifying `.bashrc`, run this to apply changes immediately:
+
+```bash
+source ~/.bashrc
+```
+
+Your shell prompt will now include the Git branch name whenever you're inside a Git repository.
+
+---
+
+## 💡 Notes
+
+- This works in **Bash**. For **Zsh**, you may need to adjust syntax slightly.
+- You can customize the colors or structure as you prefer.
+- This is a lightweight solution — no extra plugins required.

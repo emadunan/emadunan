@@ -1,0 +1,46 @@
+/* components/PhotoCard.module.css */
+.card {
+  break-inside: avoid;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.2);
+  background: var(--background);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.4);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.overlay {
+  padding: 1rem;
+  background: var(--min);
+  color: var(--text);
+  border-top: 1px solid var(--background-hover);
+}
+
+.description {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.meta {
+  font-size: 0.75rem;
+  color: var(--gray);
+  font-style: italic;
+}

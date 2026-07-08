@@ -1,0 +1,96 @@
+# Once your Shadowsocks server is running, you'll need to connect to it from your devices. This guide covers how to connect using Android, Linux (Ubuntu), and Windows clients.
+
+---
+
+## 🤖 Android (F-Droid or GitHub APK)
+
+> Shadowsocks is no longer available on Google Play. Use F-Droid or download the APK from the official GitHub repository.
+
+### Option 1: Install via F-Droid
+
+1. Visit [https://f-droid.org](https://f-droid.org) and install the F-Droid app.
+2. Search for `Shadowsocks` and install it.
+
+### Option 2: Install via GitHub
+
+1. Go to the official repo: [https://github.com/shadowsocks/shadowsocks-android](https://github.com/shadowsocks/shadowsocks-android)
+2. Download the latest `.apk` release: [Releases](https://github.com/shadowsocks/shadowsocks-android/releases)
+3. Sideload the app onto your device.
+
+### Configure the App
+
+1. Open the app and tap the `+` to add a new profile.
+2. Fill in your server details:
+   - Server: `your-server-ip`
+   - Port: `8388`
+   - Password: your password
+   - Encrypt method: `chacha20-ietf-poly1305`
+   - Route: `All`
+3. Save and toggle the connection on.
+
+---
+
+## 🐧 Linux (Ubuntu)
+
+### Install Shadowsocks Client
+
+```bash
+sudo apt update
+sudo apt install shadowsocks-libev
+```
+
+### Create a Config File
+
+```bash
+vi ~/shadowsocks-client.json
+```
+
+Paste:
+
+```json
+{
+  "server": "your-server-ip",
+  "server_port": 8388,
+  "local_port": 1080,
+  "password": "your-password",
+  "timeout": 60,
+  "method": "chacha20-ietf-poly1305"
+}
+```
+
+### Start the Client
+
+```bash
+ss-local -c ~/shadowsocks-client.json
+```
+
+Now your SOCKS5 proxy is running on `localhost:1080`. Configure your browser or system to use this proxy.
+
+---
+
+## 🪟 Windows
+
+### Download and Run the Client
+
+1. Download from: [https://github.com/shadowsocks/shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows)
+2. Extract and run `Shadowsocks.exe`
+
+### Configure the Client
+
+- Right-click the tray icon → Edit Servers
+- Fill in:
+  - Server IP
+  - Port: 8388
+  - Password
+  - Encrypt Method: `chacha20-ietf-poly1305`
+
+### Enable the Proxy
+
+- Right-click tray icon → Enable System Proxy
+- Choose Global or PAC mode
+
+---
+
+📌 **Next:** [Set Up a Shadowsocks Proxy Server on Ubuntu](/blogs/setup-shadowsocks-libev-ubuntu-proxy-server)
+
+💡 Optional: [How to Set Up SSH Key Authentication](/blogs/setup-ssh-key-authentication)

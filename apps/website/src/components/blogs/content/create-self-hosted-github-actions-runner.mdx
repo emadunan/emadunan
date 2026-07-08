@@ -1,0 +1,123 @@
+# Setting Up a Self-Hosted GitHub Actions Runner for Production
+
+In this post, I walk through the process of configuring a **self-hosted GitHub Actions runner** for a production project, running under a dedicated Linux user with systemd for auto-start.  
+
+This setup ensures **security, stability, and proper integration** with deployment scripts.
+
+---
+
+## 1. Preparation
+
+Make sure you have:
+
+- A Linux server (Ubuntu 24.04)
+- Node.js, npm, and PM2 installed
+- GitHub repository access for the project
+- Project folder with all necessary deployment scripts
+
+---
+
+## 2. Creating a Dedicated User (Optional)
+
+For production, it is recommended to run the runner under its **own Linux user** to isolate it from other services.
+
+```bash
+# Create a user for the runner
+sudo useradd -m -s /bin/bash <RUNNER_USER>
+
+# Set ownership of the runner folder
+sudo chown -R <RUNNER_USER>:<RUNNER_USER> /home/<EXISTING_USER>/actions-runners/<PROJECT_NAME>
+```
+
+---
+
+## 3. Download and Extract the Runner
+
+```bash
+# Create runner directory
+mkdir -p /home/<EXISTING_USER>/actions-runners/<PROJECT_NAME>
+
+# Navigate to the runner directory
+cd /home/<EXISTING_USER>/actions-runners/<PROJECT_NAME>
+
+# Download the runner (example for Linux x64)
+curl -O -L https://github.com/actions/runner/releases/download/v2.x.x/actions-runner-linux-x64-2.x.x.tar.gz
+
+# Extract it
+tar xzf actions-runner-linux-x64-2.x.x.tar.gz
+```
+
+---
+
+## 4. Configure the Runner
+
+```bash
+# Configure the runner with your repository
+./config.sh --url https://github.com/<USERNAME>/<REPO> --token <RUNNER_TOKEN>
+```
+
+> Replace `<USERNAME>`, `<REPO>`, and `<RUNNER_TOKEN>` with your repository details.
+
+---
+
+## 5. Install as a Systemd Service
+
+Switch to the runner user (or use your existing user if necessary):
+
+```bash
+sudo su - <RUNNER_USER>
+cd ~/actions-runners/<PROJECT_NAME>
+
+# Install the runner as a systemd service
+./svc.sh install <SERVICE_NAME>
+
+# Enable and start the service
+sudo ./svc.sh enable
+sudo ./svc.sh start
+sudo ./svc.sh status
+```
+
+> The service will now **auto-start on boot** and run jobs as the dedicated Linux user.
+
+---
+
+## 6. Node & Environment Considerations
+
+If your deployment scripts rely on Node.js and NVM, ensure the **runner loads NVM in non-interactive shells**. For example:
+
+```bash
+# In ~/.bashrc
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+```
+
+---
+
+## 7. Testing the Runner
+
+After installation:
+
+```bash
+# Check status
+sudo ./svc.sh status
+
+# Follow logs
+journalctl -u actions.runner.<SERVICE_NAME> -f
+```
+
+Once connected, the runner will listen for jobs and execute your **production deployment workflow** securely.
+
+---
+
+## ✅ Summary
+
+By following these steps:
+
+- We created a **dedicated Linux user** for isolation
+- Installed a **GitHub Actions self-hosted runner**
+- Configured **systemd** for auto-start
+- Ensured **Node/NVM is available** for deployment scripts
+
+This setup provides a **secure, reliable, and automated deployment pipeline** for production applications.
+

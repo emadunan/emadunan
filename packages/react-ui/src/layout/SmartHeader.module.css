@@ -1,0 +1,208 @@
+.header {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  grid-template-areas: "start logo end actions";
+  align-items: center;
+  column-gap: 0.75rem;
+  background: var(--color-bg-subtle);
+  color: var(--color-text);
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  z-index: 100;
+}
+
+.startNav {
+  grid-area: start;
+  justify-self: end;
+  min-width: 0;
+}
+
+.endNav {
+  grid-area: end;
+  justify-self: start;
+  min-width: 0;
+}
+
+.logo {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.navList,
+.measureList,
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.navItem :where(a) {
+  color: var(--color-text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.navItem :where(a:hover) {
+  color: var(--color-brand);
+}
+
+.menuWrap {
+  position: relative;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 0.125rem);
+  padding-block: 0.35rem;
+  padding-inline: 0.65rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.menuButton:hover,
+.menuButton:focus-visible {
+  border-color: var(--color-border-strong);
+  color: var(--color-brand);
+  outline: none;
+}
+
+.menuIcon,
+.menuIcon::before,
+.menuIcon::after {
+  display: block;
+  inline-size: 1rem;
+  block-size: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.menuIcon {
+  position: relative;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+}
+
+.menuIcon::before {
+  inset-block-start: -5px;
+}
+
+.menuIcon::after {
+  inset-block-start: 5px;
+}
+
+.menu {
+  position: absolute;
+  inset-block-start: calc(100% + 0.35rem);
+  inset-inline-end: 0;
+  z-index: 1000;
+  min-inline-size: 12rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 0.125rem);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-md);
+}
+
+.menuItem {
+  display: flex;
+}
+
+.menuItem > * {
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  color: var(--color-text);
+  text-align: start;
+  text-decoration: none;
+}
+
+.menuItem > :where(a:hover, button:hover) {
+  background: var(--color-bg-muted);
+  color: var(--color-brand);
+}
+
+.measureList,
+.measureButton {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.measureList {
+  display: flex;
+  gap: 0.75rem;
+  block-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.measureButton {
+  inline-size: max-content;
+}
+
+@media (max-width: 640px) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "logo logo actions"
+      "start end end";
+    row-gap: 0.75rem;
+    padding-inline: 1rem;
+  }
+
+  .startNav,
+  .endNav {
+    justify-self: start;
+  }
+}

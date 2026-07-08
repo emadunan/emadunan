@@ -1,0 +1,26 @@
+name: Deploy to work Environment
+
+on:
+  push:
+    branches:
+      - work
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key
+          chmod 600 private_key
+
+      - name: SSH into Server and Deploy
+        run: |
+          ssh -i private_key -o StrictHostKeyChecking=no ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }} "
+          cd /home/${{ vars.SERVER_USER }}/projects/emadunan-work &&
+          git pull origin work &&
+          cd ./scripts && ./deployToWork.sh"

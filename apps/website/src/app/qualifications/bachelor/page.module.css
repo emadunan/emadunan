@@ -1,0 +1,24 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* center content */
+  padding: 4rem 1rem;
+}
+
+.title {
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* optional: limit max width */
+  aspect-ratio: 1182 / 1702; /* exact ratio of your portrait image */
+  border: 1px solid var(--gray); /* black frame */
+  border-radius: 2px; /* subtle rounding */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* optional shadow */
+}

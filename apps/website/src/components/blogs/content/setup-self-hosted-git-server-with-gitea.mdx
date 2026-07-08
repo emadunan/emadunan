@@ -1,0 +1,286 @@
+# Setup Self-Hosted Git Server with Gitea
+
+Hosting your own Git server gives you full control over your code and data.  
+In this guide, we'll set up a Gitea-powered Git server using Docker and PostgreSQL, based on the exact steps I used to configure mine.
+
+---
+
+## 1. Prerequisites
+
+Before starting, ensure you have:
+
+- A Linux server (Ubuntu/Debian recommended)
+- `ssh` access
+- Docker and Docker Compose installed
+- Postgres Client installed on the server
+
+Check Docker installation:
+
+```bash
+docker --version
+docker compose version
+```
+
+## 2. Prepare the Server
+
+```bash
+sudo mkdir -p /opt/gitea
+cd /opt/gitea
+```
+
+
+## 3. Create docker-compose.yml
+
+Inside /opt/gitea, create the Docker Compose configuration:
+
+```yaml
+services:
+  db:
+    image: postgres:17
+    container_name: gitea-db
+    restart: always
+    environment:
+      POSTGRES_USER: gitea
+      POSTGRES_PASSWORD: giteapassword
+      POSTGRES_DB: gitea
+    volumes:
+      - /var/lib/gitea/postgres:/var/lib/postgresql/data
+    ports:
+      - "55432:5432"   # expose for backup/restore
+
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea-app
+    depends_on:
+      - db
+    restart: always
+    environment:
+      USER_UID: 1000
+      USER_GID: 1000
+      DB_TYPE: postgres
+      DB_HOST: db:5432
+      DB_NAME: gitea
+      DB_USER: gitea
+      DB_PASSWD: giteapassword
+      APP_NAME: Gitea Server
+    volumes:
+      - /var/lib/gitea/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
+```
+
+## 4. Start the Services
+
+Bring up Gitea and Postgres:
+
+```bash
+cd /opt/gitea
+docker compose up -d
+```
+
+### Check containers:
+```bash
+docker ps
+```
+
+## 5. Access the Gitea Web Interface
+Open your browser and visit:
+
+``` arduino
+http://your-server-ip:3000
+```
+
+Follow the setup wizard:
+
+- Database type: PostgreSQL
+- Host: db:5432
+- Database Name: gitea
+- Username: gitea
+- Password: giteapassword
+
+Complete the setup to create your admin account.
+
+### 6. Configure Git Access via SSH
+
+Now Gitea exposes SSH on port 222. To clone repos, use:
+
+``` bash
+git clone ssh://git@your-server-ip:222/your-user/your-repo.git
+```
+
+You can add SSH keys to your Gitea user account from Profile → SSH Keys
+
+## 7. Backup Strategy
+
+It’s crucial to back up both Gitea’s application data and Postgres database.
+Here’s a simple script I used to take backup from my local machine (Dont run the script from server):
+
+``` bash
+#!/bin/bash
+# gitea-full-backup.sh
+# Full backup of Gitea Dockerized setup for complete disaster recovery
+# Includes: database, app data, config, docker-compose setup
+
+set -e
+
+REMOTE_HOST="172.25.1.165"   # Gitea server IP
+REMOTE_USER="emad"           # SSH user
+BACKUP_DIR="$HOME/gitea-backups"
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+WORK_DIR="/tmp/gitea-backup-$TIMESTAMP"
+
+# Postgres connection info
+PG_USER="gitea"
+PG_DB="gitea"
+PG_HOST="localhost"
+PG_PORT="55432"
+PG_PASS="giteapassword"
+
+echo "[INFO] Running remote backup on $REMOTE_HOST..."
+
+ssh "$REMOTE_USER@$REMOTE_HOST" bash -s <<EOF
+set -e
+mkdir -p $WORK_DIR
+
+# 1. Dump Postgres database
+PGPASSWORD="$PG_PASS" pg_dump -h $PG_HOST -p $PG_PORT -U $PG_USER $PG_DB > $WORK_DIR/gitea-db.sql
+
+# 2. Archive Gitea app data (exclude any .ssh folders inside)
+sudo tar --exclude='./.ssh' -czf $WORK_DIR/gitea-data.tar.gz -C /var/lib/gitea/data .
+
+# 4. Backup docker-compose + env files
+if [ -f /opt/gitea/docker-compose.yml ]; then
+    tar -czf $WORK_DIR/docker-setup.tar.gz -C /opt/gitea docker-compose.yml .env 2>/dev/null || true
+fi
+
+# 5. Pack everything into a single archive
+tar -czf $WORK_DIR/gitea-backup.tar.gz -C $WORK_DIR gitea-db.sql gitea-data.tar.gz docker-setup.tar.gz 2>/dev/null || \
+tar -czf $WORK_DIR/gitea-backup.tar.gz -C $WORK_DIR gitea-db.sql gitea-data.tar.gz
+EOF
+
+echo "[INFO] Pulling backup archive to local machine..."
+mkdir -p "$BACKUP_DIR/$TIMESTAMP"
+rsync -avz "$REMOTE_USER@$REMOTE_HOST:$WORK_DIR/gitea-backup.tar.gz" "$BACKUP_DIR/$TIMESTAMP/"
+
+echo "[INFO] Cleaning up remote temp files..."
+ssh "$REMOTE_USER@$REMOTE_HOST" "rm -rf $WORK_DIR"
+
+echo "[INFO] Final local archive creation..."
+cd "$BACKUP_DIR/$TIMESTAMP"
+tar -xzf gitea-backup.tar.gz
+rm gitea-backup.tar.gz
+tar -czf "$BACKUP_DIR/gitea-backup-$TIMESTAMP.tar.gz" *
+
+echo "[INFO] ✅ Full backup complete: $BACKUP_DIR/gitea-backup-$TIMESTAMP.tar.gz"
+
+```
+
+## 8. Restoring from Backup
+
+``` bash
+#!/bin/bash
+set -euo pipefail
+
+# === Config ===
+REMOTE_HOST="172.25.1.165"
+REMOTE_USER="emad"
+REMOTE_TMP="/tmp/gitea-restore"
+WORK_DIR="$REMOTE_TMP/work"
+GITEA_UID=1000
+GITEA_GID=1000
+DB_CONTAINER="gitea-db"   # check with: docker ps
+DB_USER="gitea"
+DB_NAME="gitea"
+
+# === Args ===
+BACKUP_FILE=$1
+if [ -z "${BACKUP_FILE:-}" ]; then
+  echo "Usage: $0 <backup-archive.tar.gz>"
+  exit 1
+fi
+BACKUP_BASENAME=$(basename "$BACKUP_FILE")
+
+# === Upload backup to remote ===
+echo "[INFO] Uploading backup archive to $REMOTE_HOST..."
+ssh ${REMOTE_USER}@${REMOTE_HOST} "mkdir -p ${REMOTE_TMP}"
+rsync -avz "$BACKUP_FILE" ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_TMP}/${BACKUP_BASENAME}
+
+# === Run restore steps remotely ===
+ssh ${REMOTE_USER}@${REMOTE_HOST} \
+  REMOTE_TMP="$REMOTE_TMP" \
+  WORK_DIR="$WORK_DIR" \
+  BACKUP_BASENAME="$BACKUP_BASENAME" \
+  DB_CONTAINER="$DB_CONTAINER" \
+  DB_USER="$DB_USER" \
+  DB_NAME="$DB_NAME" \
+  GITEA_UID="$GITEA_UID" \
+  GITEA_GID="$GITEA_GID" \
+  bash -s <<'EOF'
+set -euo pipefail
+
+BACKUP_ARCHIVE="$REMOTE_TMP/$BACKUP_BASENAME"
+
+echo "[INFO] Preparing working directory..."
+rm -rf "$WORK_DIR"
+mkdir -p "$WORK_DIR"
+
+echo "[INFO] Extracting backup..."
+tar -xzf "$BACKUP_ARCHIVE" -C "$WORK_DIR"
+
+# --- Restore docker-compose setup ---
+echo "[INFO] Restoring docker-compose setup..."
+sudo mkdir -p /opt/gitea
+if [ -f "$WORK_DIR/docker-setup.tar.gz" ]; then
+  sudo tar -xzf "$WORK_DIR/docker-setup.tar.gz" -C /opt/gitea
+fi
+
+# --- Stop stack ---
+echo "[INFO] Stopping Gitea stack (if running)..."
+cd /opt/gitea
+docker compose down || true
+
+# --- Restore Gitea data ---
+echo "[INFO] Restoring /var/lib/gitea/data ..."
+sudo mkdir -p /var/lib/gitea/data
+sudo rm -rf /var/lib/gitea/data/*
+sudo tar -xzf "$WORK_DIR/gitea-data.tar.gz" -C /var/lib/gitea/data
+sudo chown -R "$GITEA_UID:$GITEA_GID" /var/lib/gitea/data
+
+# --- Start DB container only ---
+echo "[INFO] Starting Postgres container..."
+cd /opt/gitea
+docker compose up -d db
+
+# --- Wait for Postgres readiness ---
+echo "[INFO] Waiting for Postgres to be ready..."
+until docker exec "$DB_CONTAINER" pg_isready -U "$DB_USER" > /dev/null 2>&1; do
+  sleep 2
+done
+echo "[INFO] Postgres is ready."
+
+# --- Restore DB ---
+SQL_DUMP="$WORK_DIR/gitea-db.sql"
+if [ -f "$SQL_DUMP" ]; then
+  echo "[INFO] Dropping and recreating database..."
+  docker exec -i "$DB_CONTAINER" dropdb -U "$DB_USER" --if-exists "$DB_NAME" || true
+  docker exec -i "$DB_CONTAINER" createdb -U "$DB_USER" "$DB_NAME"
+
+  echo "[INFO] Restoring database from $SQL_DUMP ..."
+  docker exec -i "$DB_CONTAINER" psql -U "$DB_USER" "$DB_NAME" < "$SQL_DUMP"
+else
+  echo "[ERROR] Database dump not found at $SQL_DUMP"
+  exit 1
+fi
+
+EOF
+
+```
+
+## 9. Done 🎉
+### Now Login to the server and change directory to /opt/gitea, then run `docker compose up -d`
+
+You now have a fully working self-hosted Git server with Gitea and Postgres inside Docker, plus a backup/restore workflow.
+This setup gives you GitHub-like functionality but fully under your control.

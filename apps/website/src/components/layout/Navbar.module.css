@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link {
+  color: var(--min);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    background 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+}
+
+.link:hover {
+  background-color: var(--primary-hover);
+}
+
+.active {
+  background-color: var(--accent);
+}
+
+.iuse {
+  white-space: nowrap;
+}

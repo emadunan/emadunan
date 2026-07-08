@@ -1,0 +1,87 @@
+# SSH key authentication offers a secure and convenient way to connect to remote Linux servers without typing your password every time. In this guide, you'll learn how to generate an SSH key pair, add the public key to a server, and disable password-based authentication for improved security.
+
+## 1. Check for Existing SSH Keys
+
+First, open your terminal and run:
+
+```bash
+ls ~/.ssh/id_*
+```
+
+If you already see files like `id_ed25519` and `id_ed25519.pub`, you can skip to [Step 3](#3-copy-your-public-key-to-the-server).
+
+## 2. Generate a New SSH Key Pair
+
+To create a new SSH key pair using the default algorithm (Ed25519):
+
+```bash
+ssh-keygen
+```
+
+You’ll be prompted to:
+
+- Enter a file path (press **Enter** to accept default `~/.ssh/id_ed25519`)
+- Set a passphrase (optional, for extra security)
+
+Example output:
+
+```
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/user/.ssh/id_ed25519):
+Enter passphrase (empty for no passphrase):
+Your identification has been saved in /home/user/.ssh/id_ed25519
+Your public key has been saved in /home/user/.ssh/id_ed25519.pub
+```
+
+## 3. Copy Your Public Key to the Server
+
+If your server is reachable via SSH (e.g., `root@your-server-ip`), copy your public key with:
+
+```bash
+ssh-copy-id root@your-server-ip
+```
+
+You’ll be prompted to enter the remote user's password once.
+
+Alternatively, manually copy the contents of `~/.ssh/id_ed25519.pub` and paste it into the server's `~/.ssh/authorized_keys` file.
+
+## 4. Test SSH Key Authentication
+
+Try logging in again:
+
+```bash
+ssh root@your-server-ip
+```
+
+If everything is set up correctly, you should connect without entering a password.
+
+## 5. (Optional) Disable Password Authentication
+
+Once you're confident that key-based login works, you can disable password authentication for added security:
+
+### Edit the SSH daemon config on the server:
+
+```bash
+sudo vi /etc/ssh/sshd_config
+```
+
+Update or ensure the following lines:
+
+```
+PasswordAuthentication no
+PermitRootLogin prohibit-password
+```
+
+Then restart the SSH service:
+
+```bash
+sudo systemctl restart sshd
+```
+
+> ⚠️ Make sure your key authentication is working before disabling password login, or you could lock yourself out.
+
+---
+
+You're now using secure, key-based SSH authentication. This method reduces the risk of brute-force attacks and improves automation workflows.
+
+Feel free to refer to this post whenever setting up a new VPS or personal server.

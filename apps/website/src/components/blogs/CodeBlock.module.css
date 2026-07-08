@@ -1,0 +1,57 @@
+.codeWrapper {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: 2px;
+  background-color: var(--background-hover);
+  overflow: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Main pre block */
+.block {
+  margin: 0;
+  padding: 2.5rem 1rem 1rem 1rem;
+  overflow-x: auto;
+  white-space: pre;
+  border: 1px solid rgba(var(--gray-rgb), 0.3);
+}
+
+/* Optional comment highlight */
+.comment {
+  color: var(--gray);
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* Scrollbar customization */
+.block::-webkit-scrollbar {
+  height: 0.6em;
+}
+
+.block::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border-radius: 2px;
+}
+
+.copyButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: var(--gray);
+  color: var(--background);
+  border: 1px solid var(--gray);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.copyButton:hover {
+  background-color: var(--gray-hover);
+  opacity: 1;
+}

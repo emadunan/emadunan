@@ -21,7 +21,7 @@
     "watch": "tsup --watch",
     "clean": "rm -rf dist",
     "format": "prettier . --write",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "utils",

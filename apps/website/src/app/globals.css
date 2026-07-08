@@ -1,0 +1,239 @@
+:root {
+  /* Light/Dark Anchors */
+  --max: #001f2d;
+  --max-rgb: 0, 31, 45;
+  --min: #f7fdfc;
+  --min-rgb: 247, 253, 252;
+
+  /* Base Text & Background */
+  --text: #12372a;
+  --text-rgb: 18, 55, 42;
+  --background: #e0f7f5;
+  --background-rgb: 224, 247, 245;
+  --background-hover: #c6efea;
+  --background-hover-rgb: 198, 239, 234;
+
+  /* Primary Theme */
+  --primary: #1fb6aa;
+  /* Teal */
+  --primary-rgb: 31, 182, 170;
+  --primary-hover: #159e94;
+  --primary-hover-rgb: 21, 158, 148;
+
+  /* Secondary (Lighter Teal/Seafoam) */
+  --secondary: #a8edea;
+  --secondary-rgb: 168, 237, 234;
+  --secondary-hover: #91e6e2;
+  --secondary-hover-rgb: 145, 230, 226;
+
+  /* Accent (Deep Blue-Green) */
+  --accent: #076678;
+  --accent-rgb: 7, 102, 120;
+  --accent-hover: #054d5d;
+  --accent-hover-rgb: 5, 77, 93;
+
+  /* Neutral Grays */
+  --gray: #5c7373;
+  --gray-rgb: 92, 115, 115;
+  --gray-hover: #4d6262;
+  --gray-hover-rgb: 77, 98, 98;
+
+  /* Alerts / Highlights */
+  --danger: #d62828;
+  --danger-rgb: 214, 40, 40;
+  --danger-hover: #a61c1c;
+  --danger-hover-rgb: 166, 28, 28;
+
+  --highlight: #afffcb;
+  --highlight-rgb: 175, 255, 203;
+
+  /* Optimized Pastel Backgrounds */
+  /* Mobile */
+  --color-mobile: #fef9c3;
+  --color-mobile-hover: #fde68a;
+
+  /* Frontend */
+  --color-frontend: #ccfbf1;
+  --color-frontend-hover: #99f6e4;
+
+  /* Design / UI Resources */
+  --color-designuiresources: #ffe4e1;
+  --color-designuiresources-hover: #fbc4bc;
+
+  /* Maps / Geospatial */
+  --color-maps: #fef3c7;
+  --color-maps-hover: #fde68a;
+
+  /* Backend */
+  --color-backend: #dbeafe;
+  --color-backend-hover: #bfdbfe;
+
+  /* AI */
+  --color-ai: #e0d7ff;
+  --color-ai-hover: #c0b3ff;
+
+  /* DevOps / Testing */
+  --color-devops: #e2e8f0;
+  --color-devops-hover: #cbd5e1;
+
+  /* Infrastructure / Hosting */
+  --color-infra: #ede9fe;
+  --color-infra-hover: #ddd6fe;
+
+  /* Cloud Platforms */
+  --color-cloud: #ffedd5;
+  --color-cloud-hover: #fed7aa;
+
+  /* Security / Standards */
+  --color-security: #fee2e2;
+  --color-security-hover: #fca5a5;
+
+  /* Docs / Tools */
+  --color-docs: #d1fae5;
+  --color-docs-hover: #a7f3d0;
+
+  /* Layout Sizes */
+  --header-height: 4rem;
+  --footer-height: 12rem;
+
+  /* Breakpoints */
+  --laptopWidth: 64em;
+  --tabletWidth: 48em;
+  --largePhoneWidth: 37.5em;
+  --regularPhoneWidth: 30em;
+  --smallPhoneWidth: 22.5em;
+}
+
+:root[data-theme="dark"] {
+  --max: #0a0a0a;
+  /* Almost black */
+  --max-rgb: 10, 10, 10;
+  --min: #1a1a1a;
+  /* Dark gray background */
+  --min-rgb: 26, 26, 26;
+
+  --text: #cfd8dc;
+  /* Cool light gray text */
+  --text-rgb: 207, 216, 220;
+  --background: #121212;
+  /* Base dark background */
+  --background-rgb: 18, 18, 18;
+  --background-hover: #1e1e1e;
+  --background-hover-rgb: 30, 30, 30;
+
+  --primary: #00ff88;
+  /* Neon green */
+  --primary-rgb: 0, 255, 136;
+  --primary-hover: #00cc6f;
+  --primary-hover-rgb: 0, 204, 111;
+
+  --secondary: #00897b;
+  /* Teal */
+  --secondary-rgb: 0, 137, 123;
+  --secondary-hover: #00695c;
+  --secondary-hover-rgb: 0, 105, 92;
+
+  --accent: #1de9b6;
+  /* Mint Green */
+  --accent-rgb: 29, 233, 182;
+  --accent-hover: #00bfa5;
+  --accent-hover-rgb: 0, 191, 165;
+
+  --gray: #546e7a;
+  /* Muted blue-gray */
+  --gray-rgb: 84, 110, 122;
+  --gray-hover: #455a64;
+  --gray-hover-rgb: 69, 90, 100;
+
+  --danger: #ef5350;
+  /* Subtle red */
+  --danger-rgb: 239, 83, 80;
+  --danger-hover: #d32f2f;
+  --danger-hover-rgb: 211, 47, 47;
+
+  --highlight: #00ffc3;
+  /* For glowing highlights */
+  --highlight-rgb: 0, 255, 195;
+
+  /* Category Backgrounds */
+  --color-mobile: #1c1c1c;
+  --color-mobile-hover: #2a2a2a;
+
+  --color-frontend: #1e2e26;
+  --color-frontend-hover: #294135;
+
+  --color-designuiresources: #2e1f26;
+  --color-designuiresources-hover: #472d3c;
+
+  --color-maps: #3a2d1f;
+  --color-maps-hover: #543e29;
+
+  --color-backend: #1f2e42;
+  --color-backend-hover: #2d3e5a;
+
+  --color-ai: #2b1d47;
+  --color-ai-hover: #3c2566;
+
+  --color-devops: #2c2c3e;
+  --color-devops-hover: #3b3b53;
+
+  --color-infra: #362b4d;
+  --color-infra-hover: #4a3b6b;
+
+  --color-cloud: #44321c;
+  --color-cloud-hover: #60442a;
+
+  --color-security: #3a1f1f;
+  --color-security-hover: #552b2b;
+
+  --color-docs: #1d3c34;
+  --color-docs-hover: #28574a;
+
+  /* Sizes */
+  --header-height: 4rem;
+  --footer-height: 12rem;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html {
+  transition: background 0.3s ease, color 0.3s ease;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--text);
+  background: var(--min);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

@@ -16,13 +16,13 @@
   align-items: center;
 }
 
-.navItem a {
+.navItem :where(a) {
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
   transition: color 0.2s ease-in-out;
 }
 
-.navItem a:hover {
+.navItem :where(a:hover) {
   color: var(--color-brand);
 }

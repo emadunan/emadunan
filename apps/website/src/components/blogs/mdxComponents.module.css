@@ -1,0 +1,51 @@
+/* mdxComponents.module.css */
+
+/* Inline Code */
+.inlineCode {
+  background-color: var(--background-hover);
+  border: 1px solid rgba(var(--text-rgb), 0.1);
+  color: var(--text);
+  padding: 0.2em 0.4em;
+  border-radius: 2px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.listUnordered,
+.listOrdered {
+  margin-left: 1rem;
+}
+
+.listItem {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Optional: Make list markers match your theme */
+.listUnordered li::marker,
+.listOrdered li::marker {
+  color: var(--primary);
+}
+
+.rule {
+  border: none;
+  border-top: 2px solid var(--gray);
+  margin: 2rem 0;
+  opacity: 0.4;
+}
+
+.paragraph {
+  margin: 2rem 0 1rem;
+}
+
+/* mdxComponents.module.css */
+
+.responsiveImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 2px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}

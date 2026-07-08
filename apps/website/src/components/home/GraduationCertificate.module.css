@@ -1,0 +1,43 @@
+/* Section styling */
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; /* center the image */
+}
+
+.title {
+  margin-top: 6rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.85rem;
+  color: var(--primary);
+}
+
+/* Wrapper with exact image ratio and black border */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 1859 / 1400;
+  margin: 20px 0;
+  border: 1px solid var(--gray);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.secondaryLink {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.secondaryLink a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.secondaryLink a:hover {
+  color: var(--accent-hover);
+}

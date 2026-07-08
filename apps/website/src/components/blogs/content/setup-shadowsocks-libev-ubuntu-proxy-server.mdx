@@ -1,0 +1,285 @@
+# How to Set Up a Shadowsocks-libev Proxy Server on a Debian-Based (Ubuntu) VM
+
+### 📌 Overview
+In this guide, you’ll learn how to install and configure a lightweight, fast, and secure proxy server using **`shadowsocks-libev`** on a **Debian-based Linux VM** (Ubuntu 20.04+). Shadowsocks is widely used for bypassing network restrictions and encrypting traffic between the client and the server.
+
+---
+
+### 🚀 Why Shadowsocks-libev?
+- Lightweight and optimized C implementation
+- Strong encryption (AEAD ciphers)
+- Simple configuration
+- Cross-platform clients (desktop, mobile, browser)
+
+---
+
+### 🧱 Prerequisites
+- A VPS running Ubuntu or Debian (root or sudo access)
+- A domain name (optional, for better IP masking)
+- Basic command-line knowledge
+
+---
+
+## ☁️ Provisioning a VPS on Vultr (with Screenshots)
+
+Before we install `shadowsocks-libev`, let’s deploy a fresh Ubuntu server using [Vultr](https://www.vultr.com/), a fast and affordable cloud provider.
+
+### 📸 Step 1 – Create or Log Into Your Vultr Account
+
+Go to [https://my.vultr.com](https://my.vultr.com).  
+Click the **“Deploy New Server”** button from the top-right corner.
+
+![Step 1 – Deploy Server](/images/blogs/setup-shadowsocks-libev-ubuntu-proxy-server/step1-vultr-deploy.png)
+
+---
+
+### 📸 Step 2 – Select Server Type and Location
+
+- Choose **“Shared CPU”** for cost efficiency.
+- Select a data center region. ⚠️ *Keep in mind: the server’s location may affect the language of some HTTP responses.*
+- Pick a plan like **1 vCPU / 1GB RAM / 25GB NVMe** with **2 TB bandwidth** — perfect for personal use and capable of serving several users.
+
+![Step 2 – Select Region and Plan](/images/blogs/setup-shadowsocks-libev-ubuntu-proxy-server/step2-vultr-plan.png)
+
+---
+
+### 📸 Step 3 – Choose OS and Server Details
+
+- Select **Ubuntu 22.04 x64** (stable, LTS, and widely supported).
+- You can skip **SSH Keys**, **Startup Scripts**, and **Firewall Groups** for now (we’ll configure them manually later).
+- Set a **hostname** (e.g., `prxHub`) and a **label**.
+
+![Step 3 – OS and Hostname](/images/blogs/setup-shadowsocks-libev-ubuntu-proxy-server/step3-vultr-os.png)
+
+---
+
+### 📸 Step 4 – Wait for the Server to Finish Provisioning
+
+Wait until your server is fully initialized.  
+Don't try to log in until the **configuration panel is complete** and no warnings are shown.
+
+![Step 4 – Provisioning](/images/blogs/setup-shadowsocks-libev-ubuntu-proxy-server/step4-vultr-wait.png)
+
+---
+
+### 📸 Step 5 – SSH into Your Server
+
+Use your local terminal to connect:
+
+```bash
+ssh root@<your-vultr-ip>
+```
+
+Your **root password** is displayed on the VM’s configuration screen. You’ll be asked to change it upon first login.
+
+![Step 5 – SSH Login](/images/blogs/setup-shadowsocks-libev-ubuntu-proxy-server/step5-vultr-ssh.png)
+
+---
+
+### ✅ You're in!
+
+From here, you can continue with installing and configuring your Shadowsocks proxy.
+
+---
+
+### 🛠️ Step-by-Step Installation
+
+#### 1. Update and install dependencies
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install shadowsocks-libev -y
+```
+
+#### 2. Configure Shadowsocks server
+Create a JSON configuration file:
+```bash
+sudo nano /etc/shadowsocks-libev/config.json
+```
+
+Paste the following (edit the values accordingly):
+```json
+{
+    "server":"0.0.0.0",
+    "mode":"tcp_and_udp",
+    "server_port":8388,
+    "password":"very-complex-password",
+    "timeout":60,
+    "method":"chacha20-ietf-poly1305",
+    "nameserver": "8.8.8.8",
+    "fast_open": true
+}
+```
+
+Optional Tip — Secure Random Password
+If you want to further harden your setup, here’s a simple one-liner to generate a strong password:
+
+```bash
+openssl rand -base64 32
+```
+
+- `method`: Recommended ciphers: `aes-256-gcm`, `chacha20-ietf-poly1305`
+- `server`: Use `0.0.0.0` to listen on all interfaces
+
+---
+
+#### 3. Enable and start the service
+```bash
+sudo systemctl enable shadowsocks-libev
+sudo systemctl start shadowsocks-libev
+sudo systemctl status shadowsocks-libev   # Confirm the service is running!
+```
+
+---
+
+#### 4. Open firewall ports (UFW example)
+```bash
+sudo ufw allow 8388/tcp
+sudo ufw allow 8388/udp
+sudo ufw reload
+```
+
+---
+
+### 5. Shadowsocks Not Accessible Externally? Here’s the Fix
+Even after installing and configuring shadowsocks-libev, you might find that the server is not accessible from outside — for example:
+
+```bash
+telnet <your-server-ip> 8388
+# ➜ telnet: Unable to connect to remote host: Connection refused
+```
+
+If this happens, it’s likely because the Shadowsocks server is only listening on 127.0.0.1 (localhost) — which means it's not accepting external connections, despite your config file saying "server": "0.0.0.0".
+
+### Fix: Override the systemd unit to respect your config
+By default, Shadowsocks on Debian-based systems adds CLI arguments that override your config. To fix this:
+
+```bash
+sudo systemctl edit shadowsocks-libev
+```
+
+In the editor that opens, paste:
+
+```ini
+[Service]
+ExecStart=
+ExecStart=/usr/bin/ss-server -c /etc/shadowsocks-libev/config.json
+```
+
+Save and exit. Then reload the service:
+
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl restart shadowsocks-libev
+```
+
+🔍 Verify the server is now publicly reachable:
+
+```bash
+ss -tuln | grep 8388
+```
+
+You should see output like:
+
+```bash
+tcp   LISTEN  0  128  0.0.0.0:8388
+udp   UNCONN  0  0    0.0.0.0:8388
+```
+
+That means the Shadowsocks server is now accepting connections on all network interfaces.
+
+🧪 Optional Test with Telnet
+You can verify it from a client machine:
+
+``` bash
+telnet <your-server-ip> 8388
+```
+
+If it connects, you’ll see:
+
+```sql
+Trying <ip>...
+Connected to <ip>.
+Escape character is '^]'.
+```
+
+To exit Telnet, press:
+
+```nginx
+Ctrl + ]
+```
+
+Then type quit and press Enter.
+
+---
+
+### 6. (Optional) Enable BBR for performance
+
+```bash
+echo "net.core.default_qdisc = fq" | sudo tee -a /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control = bbr" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+#### To Confirm That BBR Is Active
+
+Run this command:
+
+```bash
+sysctl net.ipv4.tcp_congestion_control
+```
+
+Expected output:
+
+```ini
+net.ipv4.tcp_congestion_control = bbr
+```
+
+Then check it's loaded:
+
+```bash
+lsmod | grep bbr
+```
+
+Expected output:
+
+```nginx
+tcp_bbr                20480  0
+```
+
+---
+
+### 🔐 Client Configuration
+
+You can connect using:
+- **Shadowrocket / Clash** (iOS)
+- **Shadowsocks Android**
+- **Shadowsocks for Windows/macOS**
+- **Browser plugins** like **SwitchyOmega**
+
+You'll need:
+- Your server IP or domain
+- Port: 8388
+- Password: same as configured
+- Encryption: `aes-256-gcm`
+
+---
+
+### 🧪 Test Your Server
+Use a Shadowsocks client and open `https://www.google.com`. If it works, your encrypted proxy is now live.
+
+---
+
+### 🧰 Tips & Security
+
+- **Change ports** regularly
+- **Use a domain and TLS tunneling (e.g., with NGINX or Trojan)** for higher stealth
+- **Monitor traffic** with `iftop` or `netstat`
+- **Block direct access to SSH & Shadowsocks port via IP allowlisting`
+
+---
+
+### ✅ Final Thoughts
+Shadowsocks-libev is a powerful tool for private, encrypted access to the web. Setting it up on a Ubuntu VPS takes minutes and gives you control over your own proxy server.
+
+Let me know in the comments if you want a follow-up on **setting up TLS tunneling, client auto-config, or using Shadowsocks behind a CDN like Cloudflare**.

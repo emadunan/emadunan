@@ -1,0 +1,255 @@
+# WireGuard VPN – Full Setup Guide (Server & Client)
+
+This guide documents a **complete, production-style WireGuard VPN setup** using a **hub-and-spoke architecture**.
+
+- One **server (hub)** with a public IP
+- Multiple **clients (spokes)**
+- Clients can reach:
+  - The server
+  - Other clients
+  - (Optionally) the internet via the server
+
+This is the same architecture you implemented during your lab.
+
+---
+
+## Architecture Overview
+
+```
+-------------------
+Client1 (10.0.0.2) ┐
+Client2 (10.0.0.3) ├── WireGuard ── Server (10.0.0.1) ── Internet
+ClientN (10.0.0.N) ┘
+-------------------
+```
+
+- VPN subnet: `10.0.0.0/24`
+- Transport: UDP
+- Crypto: Curve25519, ChaCha20-Poly1305 (WireGuard defaults)
+
+---
+
+# PART 1 — SERVER SETUP
+
+## 1. Install WireGuard
+
+```bash
+sudo apt update
+sudo apt install wireguard
+```
+
+---
+
+## 2. Generate Server Keys
+
+```bash
+wg genkey | tee /etc/wireguard/server_private.key | wg pubkey > /etc/wireguard/server_public.key
+chmod 600 /etc/wireguard/server_private.key
+```
+
+---
+
+## 3. Create Server Configuration
+
+```bash
+sudo nano /etc/wireguard/wg0.conf
+```
+
+```ini
+[Interface]
+Address = 10.0.0.1/24
+ListenPort = 51820
+PrivateKey = <SERVER_PRIVATE_KEY>
+SaveConfig = true
+```
+
+---
+
+## 4. Enable IP Forwarding
+
+### Temporary (immediate):
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+
+### Persistent:
+```bash
+sudo nano /etc/sysctl.conf
+```
+
+Uncomment or add:
+```conf
+net.ipv4.ip_forward=1
+```
+
+Apply:
+```bash
+sudo sysctl -p
+```
+
+---
+
+## 5. Configure iptables (Forwarding + NAT)
+
+### Allow VPN traffic forwarding
+```bash
+sudo iptables -A FORWARD -i wg0 -o wg0 -j ACCEPT
+sudo iptables -A FORWARD -i wg0 -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o wg0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+```
+
+### Enable NAT (Internet access via server)
+```bash
+sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o eth0 -j MASQUERADE
+```
+
+> Replace `eth0` with your public network interface if different.
+
+---
+
+## 6. Allow WireGuard Port
+
+```bash
+sudo iptables -A INPUT -p udp --dport 51820 -j ACCEPT
+```
+
+---
+
+## 7. Start WireGuard on Server
+
+```bash
+sudo wg-quick up wg0
+sudo wg
+```
+
+---
+
+# PART 2 — CLIENT SETUP
+
+## 1. Install WireGuard
+
+```bash
+sudo apt update
+sudo apt install wireguard
+```
+
+---
+
+## 2. Generate Client Keys
+
+```bash
+wg genkey | tee client_private.key | wg pubkey > client_public.key
+chmod 600 client_private.key
+```
+
+---
+
+## 3. Create Client Configuration
+
+```bash
+sudo nano /etc/wireguard/wg0.conf
+```
+
+```ini
+[Interface]
+PrivateKey = <CLIENT_PRIVATE_KEY>
+Address = 10.0.0.2/24
+
+[Peer]
+PublicKey = <SERVER_PUBLIC_KEY>
+Endpoint = SERVER_PUBLIC_IP:51820
+AllowedIPs = 10.0.0.0/24
+PersistentKeepalive = 25
+```
+
+> `AllowedIPs` ensures:
+> - VPN traffic goes through WireGuard
+> - Internet stays on the client’s normal NIC
+
+---
+
+## 4. Start WireGuard on Client
+
+```bash
+sudo wg-quick up wg0
+```
+
+---
+
+## 5. Verify Connectivity
+
+### From client:
+```bash
+ping 10.0.0.1
+```
+
+### From server:
+```bash
+ping 10.0.0.2
+```
+
+### Inspect tunnel:
+```bash
+sudo wg
+```
+
+---
+
+# PART 3 — ADDING MORE CLIENTS
+
+For each new client:
+
+1. Generate new key pair
+2. Assign a unique IP:
+   - Client2 → `10.0.0.3/32`
+   - Client3 → `10.0.0.4/32`
+
+### Add peer on server:
+
+```ini
+[Peer]
+PublicKey = <CLIENT2_PUBLIC_KEY>
+AllowedIPs = 10.0.0.3/32
+```
+
+Restart:
+```bash
+sudo wg-quick down wg0
+sudo wg-quick up wg0
+```
+
+---
+
+## Do Clients Need to Know Each Other?
+
+❌ No.
+
+- Clients **only know the server**
+- Server routes traffic between them
+- This is a **hub-and-spoke model**
+
+---
+
+## Security Notes
+
+- WireGuard does **not** use certificates
+- Identity = public key
+- AllowedIPs acts as both:
+  - Routing table
+  - Access control list
+
+---
+
+## Conclusion
+
+You now have:
+- A scalable WireGuard VPN
+- Centralized routing
+- Secure client isolation
+- Optional internet breakout via server
+
+This setup scales cleanly to **hundreds of clients**.
+
+---
+
+Happy tunneling 🚀

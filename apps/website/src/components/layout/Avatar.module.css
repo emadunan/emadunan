@@ -1,0 +1,22 @@
+.avatarWrapper {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 2px solid var(--min); /* contrast ring */
+  object-fit: cover;
+  box-shadow: 0 0 0 2px rgba(var(--max-rgb), 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px rgba(var(--min-rgb), 0.25);
+}
