@@ -151,6 +151,7 @@
     height: 2px;
     border-radius: 999px;
     background: currentColor;
+    transition: transform 180ms ease, opacity 120ms ease;
   }
 
   .menuIcon {
@@ -170,6 +171,19 @@
 
   .menuIcon::after {
     inset-block-start: 6px;
+  }
+
+  .menuButton[aria-expanded="true"] .menuIcon {
+    transform: rotate(45deg);
+  }
+
+  .menuButton[aria-expanded="true"] .menuIcon::before {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .menuButton[aria-expanded="true"] .menuIcon::after {
+    transform: translateY(-6px) rotate(90deg);
   }
 
   .logo {
@@ -199,12 +213,13 @@
 
   .drawer {
     position: fixed;
-    inset-block-start: var(--app-header-height, var(--header-height, 4rem));
-    inset-inline-start: 0;
+    top: var(--app-header-height, var(--header-height, 4rem));
+    left: 0;
+    right: auto;
     display: block;
     width: min(18rem, 82vw);
     height: calc(100dvh - var(--app-header-height, var(--header-height, 4rem)));
-    border-inline-end: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
     background: var(--color-bg);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
     padding: 1rem;
@@ -216,16 +231,18 @@
     z-index: 950;
   }
 
+  .rtl .drawer,
   :global([dir="rtl"]) .drawer,
   .header:dir(rtl) .drawer {
-    inset-inline-start: auto;
-    inset-inline-end: 0;
-    border-inline-end: 0;
-    border-inline-start: 1px solid var(--color-border);
+    left: auto;
+    right: 0;
+    border-right: 0;
+    border-left: 1px solid var(--color-border);
     transform: translateX(100%);
   }
 
   .drawerOpen,
+  .rtl .drawerOpen,
   :global([dir="rtl"]) .drawerOpen,
   .header:dir(rtl) .drawerOpen {
     pointer-events: auto;

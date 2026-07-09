@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import styles from "./AppHeader.module.css";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -21,8 +21,31 @@ const AppHeader: React.FC<Props> = ({
   ...rest
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isRtl, setIsRtl] = useState(() => {
+    if (typeof document === "undefined") return false;
+    return document.documentElement.dir === "rtl" || document.body.dir === "rtl";
+  });
   const drawerId = useId();
+  const headerRef = useRef<HTMLElement>(null);
   const navItems = React.Children.toArray(children);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !headerRef.current) return;
+
+    const syncDirection = () => {
+      setIsRtl(window.getComputedStyle(headerRef.current!).direction === "rtl");
+    };
+
+    syncDirection();
+
+    if (typeof MutationObserver === "undefined") return;
+
+    const observer = new MutationObserver(syncDirection);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["dir", "class", "style"] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["dir", "class", "style"] });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!menuOpen || typeof document === "undefined") return;
@@ -55,7 +78,7 @@ const AppHeader: React.FC<Props> = ({
   };
 
   return (
-    <header className={[styles.header, className].filter(Boolean).join(" ")} {...rest}>
+    <header ref={headerRef} className={[styles.header, isRtl ? styles.rtl : "", className].filter(Boolean).join(" ")} {...rest}>
       <button
         type="button"
         className={styles.menuButton}
