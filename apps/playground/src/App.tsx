@@ -1,27 +1,29 @@
+import { FiRepeat } from "react-icons/fi";
 import "./App.css";
 import logo from "./assets/logo.png";
 import PlaygroundPreview from "./components/PlaygroundPreview";
 import {
   Layout,
   Footer,
-  Header,
   Main,
-  Navbar,
-  Logo,
   DropdownMenu,
+  AppHeader,
 } from "@emadunan/react-ui";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { BiHome } from "react-icons/bi";
+import { MdOutlinePointOfSale } from "react-icons/md";
 
 function App() {
+  const navItems = [
+    { to: "/", label: "Home", icon: BiHome },
+    { to: "/create", label: "Create", icon: MdOutlinePointOfSale },
+    { to: "/inquire", label: "Inquire", icon: FiRepeat },
+  ];
   return (
     <Layout>
-      <Header
-        title="Property Rents"
-        logo={
-          <Logo>
-            <img src={logo} alt="App logo" />
-          </Logo>
-        }
+      <AppHeader
+        logoSrc={logo}
+        logoAlt="App logo"
         actions={
           <DropdownMenu
             trigger={
@@ -44,16 +46,14 @@ function App() {
             </DropdownMenu.Item>
           </DropdownMenu>
         }
-        nav={
-          <Navbar>
-            <a href="/">Home</a>
-            <a href="/create">Create</a>
-            <a href="/inquire" className="active">
-              Inquire
-            </a>
-          </Navbar>
-        }
-      />
+      >
+        {navItems.map(({ to, label, icon: Icon }) => (
+          <a key={to} href={to}>
+            <Icon size={17} aria-hidden />
+            <span>{label}</span>
+          </a>
+        ))}
+      </AppHeader>
       <Main>
         <PlaygroundPreview />
       </Main>

@@ -3,7 +3,10 @@ import styles from "./AppHeader.module.css";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
   title?: string;
-  logo: React.ReactNode;
+  logo?: React.ReactNode;
+  logoSrc?: string;
+  logoAlt?: string;
+  logoHref?: string;
   actions?: React.ReactNode;
   navLabel?: string;
   menuLabel?: string;
@@ -13,6 +16,9 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 const AppHeader: React.FC<Props> = ({
   title,
   logo,
+  logoSrc,
+  logoAlt = "",
+  logoHref,
   actions,
   navLabel = "Primary navigation",
   menuLabel = "Menu",
@@ -28,6 +34,19 @@ const AppHeader: React.FC<Props> = ({
   const drawerId = useId();
   const headerRef = useRef<HTMLElement>(null);
   const navItems = React.Children.toArray(children);
+  const defaultLogo = logoSrc ? (
+    <figure className={styles.logoMark}>
+      <img src={logoSrc} alt={logoAlt} />
+    </figure>
+  ) : null;
+  const logoContent = logo ?? defaultLogo;
+  const renderedLogo = logoHref && logoContent ? (
+    <a className={styles.logoLink} href={logoHref} aria-label={logoAlt || title}>
+      {logoContent}
+    </a>
+  ) : (
+    logoContent
+  );
 
   useEffect(() => {
     if (typeof window === "undefined" || !headerRef.current) return;
@@ -91,7 +110,7 @@ const AppHeader: React.FC<Props> = ({
       </button>
 
       <div className={styles.logo}>
-        {logo}
+        {renderedLogo}
         {title && <h1 className={styles.title}>{title}</h1>}
       </div>
 
