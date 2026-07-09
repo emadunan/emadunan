@@ -13,8 +13,6 @@ Personal website, React UI components, and shared TypeScript packages in one pnp
 - `@emadunan/auth-core`: shared auth helpers.
 - `@emadunan/shared-utils`: shared utility functions.
 - `@emadunan/web-utils`: browser/web utilities.
-- `@emadunan/eslint-config`: shared ESLint configs.
-- `@emadunan/typescript-config`: shared TypeScript configs.
 
 ## Commands
 
@@ -31,5 +29,5 @@ Run a specific workspace with a filter:
 ```bash
 pnpm --filter website dev
 pnpm --filter @emadunan/react-ui build
-pnpm --filter playground dev
+pnpm --filter @emadunan/playground dev
 ```

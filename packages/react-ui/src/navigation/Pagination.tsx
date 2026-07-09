@@ -8,6 +8,11 @@ import {
 import classicStyles from './Pagination.classic.module.css';
 import modernStyles from './Pagination.modern.module.css';
 
+const FirstIcon = FaAngleDoubleLeft as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+const PreviousIcon = FaAngleLeft as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+const NextIcon = FaAngleRight as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+const LastIcon = FaAngleDoubleRight as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+
 export interface PaginationLabels {
   prev?: string;
   next?: string;
@@ -53,7 +58,7 @@ const Pagination: React.FC<PaginationProps> = ({
           disabled={currentPage === 1}
           aria-label={labels?.first ?? 'First'}
         >
-          <FaAngleDoubleLeft />
+          <FirstIcon />
           {labels?.first && <span>{labels.first}</span>}
         </button>
 
@@ -63,7 +68,7 @@ const Pagination: React.FC<PaginationProps> = ({
           disabled={currentPage === 1}
           aria-label={labels?.prev ?? 'Previous'}
         >
-          <FaAngleLeft />
+          <PreviousIcon />
           {labels?.prev && <span>{labels.prev}</span>}
         </button>
 
@@ -88,7 +93,7 @@ const Pagination: React.FC<PaginationProps> = ({
           aria-label={labels?.next ?? 'Next'}
         >
           {labels?.next && <span>{labels.next}</span>}
-          <FaAngleRight />
+          <NextIcon />
         </button>
 
         <button
@@ -98,7 +103,7 @@ const Pagination: React.FC<PaginationProps> = ({
           aria-label={labels?.last ?? 'Last'}
         >
           {labels?.last && <span>{labels.last}</span>}
-          <FaAngleDoubleRight />
+          <LastIcon />
         </button>
       </nav>
     );
@@ -131,7 +136,7 @@ const Pagination: React.FC<PaginationProps> = ({
         disabled={currentPage === 1}
         aria-label={labels?.first ?? 'First'}
       >
-        <FaAngleDoubleLeft />
+        <FirstIcon />
         {labels?.first && <span>{labels.first}</span>}
       </button>
 
@@ -141,7 +146,7 @@ const Pagination: React.FC<PaginationProps> = ({
         disabled={currentPage === 1}
         aria-label={labels?.prev ?? 'Previous'}
       >
-        <FaAngleLeft />
+        <PreviousIcon />
         {labels?.prev && <span>{labels.prev}</span>}
       </button>
 
@@ -172,7 +177,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label={labels?.next ?? 'Next'}
       >
         {labels?.next && <span>{labels.next}</span>}
-        <FaAngleRight />
+        <NextIcon />
       </button>
 
       <button
@@ -182,7 +187,7 @@ const Pagination: React.FC<PaginationProps> = ({
         aria-label={labels?.last ?? 'Last'}
       >
         {labels?.last && <span>{labels.last}</span>}
-        <FaAngleDoubleRight />
+        <LastIcon />
       </button>
     </nav>
   );

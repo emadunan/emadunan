@@ -10,13 +10,16 @@
     "clean": "find . -type d \\( -name node_modules -o -name dist -o -name build -o -name .turbo -o -name .next -o -name .vite \\) -prune -exec rm -rf {} + && rm -f package-lock.json yarn.lock .eslintcache && rm -rf .pnpm-store .turbo"
   },
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
     "@types/node": "^24.8.1",
     "cpx": "^1.5.0",
     "eslint": "^9.38.0",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "turbo": "^2.5.8",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "eslint-config-prettier": "^10.1.8",
+    "typescript-eslint": "^8.46.1"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

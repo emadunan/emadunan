@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "clean": "rm -rf .next",
     "clean:deep": "rm -rf .next node_modules"
   },
@@ -24,6 +24,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@eslint/eslintrc": "^3.3.1",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "15.4.10"
   }
 }

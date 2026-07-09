@@ -1,9 +1,25 @@
 {
-  "extends": "@emadunan/typescript-config/react-library.json",
   "compilerOptions": {
-    "module": "esnext",
-    "noEmit": true,
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
     "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true
   },
-  "include": ["src", "tsconfig.build.json"]
+  "include": [
+    "src",
+    "tsconfig.build.json"
+  ]
 }
