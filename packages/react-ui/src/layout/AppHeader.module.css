@@ -216,7 +216,8 @@
     z-index: 950;
   }
 
-  :global([dir="rtl"]) .drawer {
+  :global([dir="rtl"]) .drawer,
+  .header:dir(rtl) .drawer {
     inset-inline-start: auto;
     inset-inline-end: 0;
     border-inline-end: 0;
@@ -225,7 +226,8 @@
   }
 
   .drawerOpen,
-  :global([dir="rtl"]) .drawerOpen {
+  :global([dir="rtl"]) .drawerOpen,
+  .header:dir(rtl) .drawerOpen {
     pointer-events: auto;
     transform: translateX(0);
     transition: transform 220ms ease;
@@ -235,13 +237,16 @@
   .drawer .navItem :where(a) {
     width: 100%;
     justify-content: flex-start;
+    text-align: start;
     min-height: 42px;
     padding-inline: 12px;
     font-size: 14px;
   }
 
-  :global([dir="rtl"]) .drawer .navItem :where(a) {
+  :global([dir="rtl"]) .drawer .navItem :where(a),
+  .header:dir(rtl) .drawer .navItem :where(a) {
     justify-content: flex-start;
+    text-align: start;
   }
 }
 
