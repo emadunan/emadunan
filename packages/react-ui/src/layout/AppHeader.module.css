@@ -8,7 +8,7 @@
   color: var(--color-text);
   padding: 0.75rem 1.5rem;
   border-bottom: 1px solid var(--color-border);
-  z-index: 925;
+  z-index: 999;
 }
 
 .logo,
@@ -217,7 +217,7 @@
     left: 50%;
     justify-self: auto;
     transform: translateX(-50%);
-    z-index: 925;
+    z-index: 1000;
   }
 
   .logoMark {
