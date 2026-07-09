@@ -56,7 +56,64 @@
   display: flex;
   align-items: center;
   justify-self: end;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.themeToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.themeToggle:hover,
+.themeToggle:focus-visible {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-muted);
+  color: var(--color-text-accent);
+  outline: none;
+}
+
+.themeToggle:active {
+  background: var(--color-bg-subtle);
+}
+
+.themeIcon {
+  position: relative;
+  display: block;
+  width: 17px;
+  height: 17px;
+  color: currentColor;
+}
+
+.themeIconMoon {
+  border-radius: 999px;
+  box-shadow: inset -5px 0 0 currentColor;
+  transform: translateX(2px);
+}
+
+.themeIconSun {
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+
+.themeIconSun::before,
+.themeIconSun::after {
+  content: "";
+  position: absolute;
+  inset: -5px 6px;
+  border-block: 2px solid currentColor;
+}
+
+.themeIconSun::after {
+  transform: rotate(90deg);
 }
 
 .desktopNavbar {

@@ -1,6 +1,17 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import styles from "./AppHeader.module.css";
 
+export type ThemeMode = "light" | "dark";
+
+const getInitialTheme = (): ThemeMode => {
+  if (typeof window === "undefined") return "light";
+
+  const savedTheme = window.localStorage.getItem("theme");
+  if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+};
+
 interface Props extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   logo?: React.ReactNode;
@@ -10,6 +21,9 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   actions?: React.ReactNode;
   navLabel?: string;
   menuLabel?: string;
+  showThemeToggle?: boolean;
+  theme?: ThemeMode;
+  onThemeChange?: (theme: ThemeMode) => void;
   children: React.ReactNode;
 }
 
@@ -22,11 +36,15 @@ const AppHeader: React.FC<Props> = ({
   actions,
   navLabel = "Primary navigation",
   menuLabel = "Menu",
+  showThemeToggle = true,
+  theme: controlledTheme,
+  onThemeChange,
   children,
   className,
   ...rest
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [uncontrolledTheme, setUncontrolledTheme] = useState<ThemeMode>(getInitialTheme);
   const [isRtl, setIsRtl] = useState(() => {
     if (typeof document === "undefined") return false;
     return document.documentElement.dir === "rtl" || document.body.dir === "rtl";
@@ -34,12 +52,15 @@ const AppHeader: React.FC<Props> = ({
   const drawerId = useId();
   const headerRef = useRef<HTMLElement>(null);
   const navItems = React.Children.toArray(children);
+  const theme = controlledTheme ?? uncontrolledTheme;
+  const isControlledTheme = controlledTheme !== undefined;
   const defaultLogo = logoSrc ? (
     <figure className={styles.logoMark}>
       <img src={logoSrc} alt={logoAlt} />
     </figure>
   ) : null;
   const logoContent = logo ?? defaultLogo;
+  const isDarkTheme = theme === "dark";
   const renderedLogo = logoHref && logoContent ? (
     <a className={styles.logoLink} href={logoHref} aria-label={logoAlt || title}>
       {logoContent}
@@ -47,6 +68,16 @@ const AppHeader: React.FC<Props> = ({
   ) : (
     logoContent
   );
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    document.documentElement.dataset.theme = theme;
+
+    if (!isControlledTheme && typeof window !== "undefined") {
+      window.localStorage.setItem("theme", theme);
+    }
+  }, [isControlledTheme, theme]);
 
   useEffect(() => {
     if (typeof window === "undefined" || !headerRef.current) return;
@@ -96,6 +127,16 @@ const AppHeader: React.FC<Props> = ({
     }
   };
 
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+
+    if (!isControlledTheme) {
+      setUncontrolledTheme(nextTheme);
+    }
+
+    onThemeChange?.(nextTheme);
+  };
+
   return (
     <header ref={headerRef} className={[styles.header, isRtl ? styles.rtl : "", className].filter(Boolean).join(" ")} {...rest}>
       <button
@@ -118,7 +159,20 @@ const AppHeader: React.FC<Props> = ({
         <ul className={styles.navList}>{renderNavItems("desktop")}</ul>
       </nav>
 
-      <div className={styles.actions}>{actions}</div>
+      <div className={styles.actions}>
+        {showThemeToggle && (
+          <button
+            type="button"
+            className={styles.themeToggle}
+            aria-label={isDarkTheme ? "Switch to light mode" : "Switch to dark mode"}
+            aria-pressed={isDarkTheme}
+            onClick={toggleTheme}
+          >
+            <span className={[styles.themeIcon, isDarkTheme ? styles.themeIconSun : styles.themeIconMoon].join(" ")} aria-hidden="true" />
+          </button>
+        )}
+        {actions}
+      </div>
 
       {menuOpen && <button type="button" className={styles.overlay} aria-label="Close menu" onClick={() => setMenuOpen(false)} />}
 
