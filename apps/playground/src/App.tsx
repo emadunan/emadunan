@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./assets/logo.png";
 import {
@@ -9,21 +9,19 @@ import {
   Navbar,
   Logo,
   DropdownMenu,
-  Input,
   Button,
-  Select,
-  Checkbox,
-  Spinner,
-  Modal,
-  AutocompleteInput,
-  RadioGroup,
-  Pagination,
-  Textarea,
 } from "@emadunan/react-ui";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 function App() {
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [viewport, setViewport] = useState<"desktop" | "tablet" | "mobile">("desktop");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [isInteractive, setIsInteractive] = useState(true);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
   return (
     <Layout>
       <Header
@@ -59,108 +57,87 @@ function App() {
           <Navbar>
             <a href="/">Home</a>
             <a href="/create">Create</a>
-            <a href="/inquire" className="active">Inquire</a>
+            <a href="/inquire" className="active">
+              Inquire
+            </a>
           </Navbar>
         }
       />
       <Main>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              width: "30rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{ display: "flex", alignItems: "flex-start", gap: ".3rem" }}
-            >
-              <Select size="sm">
-                <Select.Option>EGP</Select.Option>
-                <Select.Option>UAE</Select.Option>
-                <Select.Option>KSA</Select.Option>
-              </Select>
-              <Input size="sm" />
-              <Button size="sm">تعديل البيانات</Button>
-            </div>
-
-            <div
-              style={{ display: "flex", alignItems: "flex-start", gap: ".3rem" }}
-            >
-              <AutocompleteInput label="Districts" fetchSuggestions={() => Promise.resolve([{ id: 1, name: "النظام" }, { id: 2, name: "المنتزة" }, { id: 2, name: "القومية" }, { id: 2, name: "العبور" }])} onSelect={() => { }} />
-            </div>
-
-            <div
-              style={{ display: "flex", alignItems: "center", gap: ".3rem" }}
-            >
-              <Select size="md">
-                <Select.Option>EGP</Select.Option>
-                <Select.Option>UAE</Select.Option>
-                <Select.Option>KSA</Select.Option>
-              </Select>
-              <Input size="md" />
-              <Button>ارسال</Button>
-            </div>
-
-            <div
-              style={{ display: "flex", alignItems: "flex-end", gap: ".3rem" }}
-            >
-              <Select size="lg">
-                <Select.Option>EGP</Select.Option>
-                <Select.Option>UAE</Select.Option>
-                <Select.Option>KSA</Select.Option>
-              </Select>
-              <Input size="lg" />
-              <Button size="lg">ارسال</Button>
-            </div>
-            <Checkbox label="Save" size="sm" />
-            <Checkbox label="Save" size="md" />
-            <Checkbox label="Save" size="lg" />
-
+        <section className="playground-shell" aria-label="Component playground">
+          <div className="playground-toolbar">
             <div>
-              <Spinner size="sm" />
-              <Spinner size="md" />
-              <Spinner size="lg" />
+              <p className="playground-eyebrow">React UI Playground</p>
+              <h2>Component Preview</h2>
             </div>
-
-
-            <div>
-              <RadioGroup name="Test"
-                value="walid"
-                onChange={() => { }}
-                options={[
-                  { label: "Walid", value: "walid" },
-                  { label: "Rami", value: "rami" },
-                  { label: "Emad", value: "emad" },
-                  { label: "Hesham", value: "hesham" },
-                ]} />
-            </div>
-
-
-            <Modal title="Delete Property" isOpen={isOpenModal} onClose={() => setIsOpenModal(false)}>
-              <h2>Hi there</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque distinctio qui voluptatum maiores illo eligendi ipsa quasi. Porro mollitia vel reiciendis deserunt corporis animi nesciunt rerum quasi qui beatae fugiat dolorem architecto quaerat veniam harum sequi eligendi, consectetur delectus consequuntur alias ducimus! Earum nobis veritatis voluptatibus modi, doloribus nulla blanditiis. Temporibus laboriosam officia minus sit repudiandae, enim expedita fugit illo cupiditate eius atque ullam fuga nisi excepturi dolore necessitatibus, voluptates vitae quos laudantium debitis ab molestias reprehenderit! Earum fuga excepturi debitis deleniti facilis incidunt aliquam ut a dolorum molestias assumenda nulla nihil distinctio ducimus, laborum rem tenetur, dicta beatae! Aut, sequi nulla ut vero exercitationem facere debitis error blanditiis veniam consectetur maiores omnis minima quae deleniti laudantium recusandae? Inventore repellendus aperiam quod quae molestiae dolor culpa rem velit impedit doloremque optio explicabo tempora illum dignissimos veniam, cupiditate, corporis laudantium in nostrum, incidunt ullam ea. Tempore nisi nam, qui corrupti quo doloribus dignissimos aliquid quod. Accusamus quia cumque nesciunt distinctio ex aliquid eaque magni, necessitatibus quidem commodi quos corporis. Ipsam odio quidem quibusdam dignissimos, quasi dolor, eaque incidunt velit architecto ex quaerat commodi veniam alias? Accusamus labore harum ipsa tempore dignissimos, aperiam aliquam suscipit iure deserunt expedita culpa distinctio quos.</p>
-              <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
-                <Button onClick={() => alert("Approved!")}>Approve</Button>
-                <Button variant="error" onClick={() => setIsOpenModal(false)}>Close</Button>
-                <Button variant="info" onClick={() => setIsOpenModal(false)}>Close</Button>
-                <Button variant="secondary" onClick={() => setIsOpenModal(false)}>Close</Button>
-                <Button variant="success" onClick={() => setIsOpenModal(false)}>Close</Button>
-                <Button variant="warning" onClick={() => setIsOpenModal(false)}>Close</Button>
+            <div className="playground-meta" aria-label="Preview controls">
+              <div className="segmented-control viewport-control" aria-label="Viewport size">
+                <button
+                  type="button"
+                  className={viewport === "desktop" ? "active" : undefined}
+                  onClick={() => setViewport("desktop")}
+                >
+                  Desktop
+                </button>
+                <button
+                  type="button"
+                  className={viewport === "tablet" ? "active" : undefined}
+                  onClick={() => setViewport("tablet")}
+                >
+                  Tablet
+                </button>
+                <button
+                  type="button"
+                  className={viewport === "mobile" ? "active" : undefined}
+                  onClick={() => setViewport("mobile")}
+                >
+                  Mobile
+                </button>
               </div>
-            </Modal>
+              <div className="segmented-control theme-control" aria-label="Theme">
+                <button
+                  type="button"
+                  className={theme === "light" ? "active" : undefined}
+                  onClick={() => setTheme("light")}
+                >
+                  Light
+                </button>
+                <button
+                  type="button"
+                  className={theme === "dark" ? "active" : undefined}
+                  onClick={() => setTheme("dark")}
+                >
+                  Dark
+                </button>
+              </div>
+              <button
+                type="button"
+                className={isInteractive ? "interaction-toggle active" : "interaction-toggle"}
+                aria-pressed={isInteractive}
+                onClick={() => setIsInteractive((value) => !value)}
+              >
+                {isInteractive ? "Interactive" : "Static"}
+              </button>
+            </div>
           </div>
-        </div>
-        <Pagination currentPage={8} pageSize={10} total={136} siblingCount={2} onChange={() => {}} variant="classic" labels={{
-          first: "الأول",
-          last: "الأخير",
-          prev: "السابق",
-          next: "التالي"
-        }}/>
 
-        <Textarea label="Test Text Area" value={"I love ...."}/>
+          <div className="preview-frame">
+            <div className="preview-frame__header" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+
+            <div className="preview-canvas" data-viewport={viewport}>
+              <div
+                className={isInteractive ? "component-stage" : "component-stage is-static"}
+                inert={isInteractive ? undefined : true}
+              >
+                <Button>Component under test</Button>
+              </div>
+            </div>
+          </div>
+        </section>
       </Main>
       <Footer>
         <p>General Administration of Information Technology.</p>
