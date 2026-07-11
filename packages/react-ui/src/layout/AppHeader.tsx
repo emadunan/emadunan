@@ -22,6 +22,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   navLabel?: string;
   menuLabel?: string;
   showThemeToggle?: boolean;
+  sticky?: boolean;
   theme?: ThemeMode;
   onThemeChange?: (theme: ThemeMode) => void;
   children: React.ReactNode;
@@ -37,6 +38,7 @@ const AppHeader: React.FC<Props> = ({
   navLabel = "Primary navigation",
   menuLabel = "Menu",
   showThemeToggle = true,
+  sticky = false,
   theme: controlledTheme,
   onThemeChange,
   children,
@@ -138,7 +140,7 @@ const AppHeader: React.FC<Props> = ({
   };
 
   return (
-    <header ref={headerRef} className={[styles.header, isRtl ? styles.rtl : "", className].filter(Boolean).join(" ")} {...rest}>
+    <header ref={headerRef} className={[styles.header, sticky ? styles.sticky : "", isRtl ? styles.rtl : "", className].filter(Boolean).join(" ")} {...rest}>
       <button
         type="button"
         className={styles.menuButton}
