@@ -206,7 +206,7 @@
 @media (max-width: 920px) {
   .header {
     grid-template-columns: auto minmax(0, 1fr) auto;
-    padding-inline: 1rem;
+    padding-inline: 1rem 0;
   }
 
   .menuButton {
