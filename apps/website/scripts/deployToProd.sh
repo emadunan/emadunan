@@ -58,8 +58,8 @@ git pull --ff-only origin "$DEPLOY_BRANCH"
 echo "📥 Installing dependencies..."
 npm ci
 
-echo "🏗️ Building website..."
-npm run build --workspace=website
+echo "🏗️ Building website and its workspace dependencies..."
+npx turbo run build --filter=website
 
 echo "♻️ Starting or reloading $APP_NAME..."
 pm2 startOrReload apps/website/ecosystem.config.js --only "$APP_NAME" --update-env
