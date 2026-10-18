@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@amen24/ui": "^1.0.4",
+    "@emadunan/react-ui": "^1.2.1",
     "@juggle/resize-observer": "^3.4.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.4.4",

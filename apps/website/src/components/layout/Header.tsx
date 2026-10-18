@@ -24,7 +24,8 @@ const Header: React.FC = () => {
       to: "/awards",
       label: "Awards",
       match: "/awards",
-    }
+    },
+    { to: "/docs/react-ui", label: "Docs", match: "/docs" },
   ];
 
   return (

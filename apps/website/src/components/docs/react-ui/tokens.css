@@ -1,0 +1,56 @@
+/*
+ * Maps the --color-* tokens that @emadunan/react-ui expects onto this
+ * site's palette. Scoped to .react-ui-docs so the rest of the site is
+ * untouched; dark mode follows automatically because the site variables
+ * switch on html[data-theme].
+ */
+.react-ui-docs {
+  /* Surfaces */
+  --color-bg: var(--min);
+  --color-bg-subtle: var(--background);
+  --color-bg-muted: var(--background-hover);
+  --color-hover: var(--background-hover);
+  --color-overlay: rgba(var(--max-rgb), 0.5);
+
+  /* Text */
+  --color-text: var(--text);
+  --color-text-muted: var(--gray);
+  --color-text-accent: var(--accent);
+
+  /* Borders */
+  --color-border: rgba(var(--gray-rgb), 0.35);
+  --color-border-muted: rgba(var(--gray-rgb), 0.2);
+  --color-border-strong: var(--gray);
+
+  /* Brand */
+  --color-brand: var(--primary);
+  --color-brand-hover: var(--primary-hover);
+  --color-brand-active: var(--accent);
+  --color-brand-foreground: var(--max);
+  --color-focus-ring: rgba(var(--primary-rgb), 0.45);
+
+  /* Disabled */
+  --color-disabled-bg: rgba(var(--gray-rgb), 0.15);
+  --color-disabled-text: var(--gray);
+
+  /* Status */
+  --color-error: var(--danger);
+  --color-error-hover: var(--danger-hover);
+  --color-error-active: var(--danger-hover);
+  --color-error-foreground: #ffffff;
+
+  --color-success: #2e7d32;
+  --color-success-hover: #256b29;
+  --color-success-active: #1b5e20;
+  --color-success-foreground: #ffffff;
+
+  --color-warning: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-warning-active: #b45309;
+  --color-warning-foreground: #1a1a1a;
+
+  --color-info: #0277bd;
+  --color-info-hover: #01669f;
+  --color-info-active: #01579b;
+  --color-info-foreground: #ffffff;
+}
